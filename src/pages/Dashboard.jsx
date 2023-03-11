@@ -20,8 +20,17 @@ const Dashboard = () => {
         role: ""
     })
     const [newDoc, setNewDoc] = useState({
-        name: "",
-        email: ""
+        firstname:"",
+        middlename:"",
+        lastname:"",
+        phone:"",
+        email:"",
+        qualification:"",
+        speciality:"",
+        experience:"",
+        license:"",
+        domain:"",
+        address:""
     })
     const [error, setError] = useState();
     let currentUserId;
@@ -111,6 +120,7 @@ const Dashboard = () => {
     const handleOnChangenewDoc = (e) => {
         // console.log("clicked handleOnChange");
         // console.log(userData);
+        // console.log(newDoc);
         setNewDoc({ ...newDoc, [e.target.name]: e.target.value })
     }
     // console.log(currentUserId)
@@ -165,7 +175,7 @@ const Dashboard = () => {
         setError("User Created")
         setNewMember({
             firstname: "",
-            lastname:"",
+            lastname: "",
             email: "",
             password: "",
             role: ""
@@ -194,7 +204,7 @@ const Dashboard = () => {
 
     }
 
-    const submitToDbnewDoc = (mr, manager, admin, name, email) => {
+    const submitToDbnewDoc = (mr, manager, admin,) => {
         // POST request using fetch inside useEffect React hook
 
         const requestOptions = {
@@ -207,8 +217,17 @@ const Dashboard = () => {
                 mrID: mr,
                 manager: manager,
                 adminID: admin,
-                name: name,
-                email: email,
+                firstname:newDoc.firstname,
+                middlename:newDoc.middlename,
+                lastname:newDoc.lastname,
+                phone:newDoc.phone,
+                email:newDoc.email,
+                qualification:newDoc.qualification,
+                speciality:newDoc.speciality,
+                experience:newDoc.experience,
+                license:newDoc.license,
+                domain:newDoc.domain,
+                address:newDoc.address,
             })
         };
         fetch(`${process.env.REACT_APP_URL}/api/auth/createdr`, requestOptions)
@@ -224,27 +243,35 @@ const Dashboard = () => {
             });
         // Here the auth token returnd by the seevr wil no use coz 
         // we wil give tech or manager their user name and password not auth token
-        setNewMember({
-            name: "",
-            email: "",
-            password: "",
-            role: ""
+        setNewDoc({
+                firstname:"",
+            middlename:"",
+            lastname:"",
+            phone:"",
+            email:"",
+            qualification:"",
+            speciality:"",
+            experience:"",
+            license:"",
+            domain:"",
+            address:""
         })
         setTimeout(() => {
             setError("")
-        }, 4000);
+        }, 5000);
 
     }
 
-    const createDoctor = () => {
-        console.log("createDoctor")
+    const createDoctor = (e) => {
+        // console.log("createDoctor")
+        e.preventDefault()
         let admin = currentUseradminID;
         let mr = currentUserId;
         let manager = currentUserManagerID;
 
-        console.log(admin + " " + mr + " " + manager + " " + newDoc.name + " " + newDoc.email);
-
-        submitToDbnewDoc(mr, manager, admin, newDoc.name, newDoc.email);
+        // console.log(admin + " " + mr + " " + manager + " " + newDoc.name + " " + newDoc.email);
+        // console.log(newDoc)
+        submitToDbnewDoc(mr, manager, admin);
 
     }
 
@@ -315,12 +342,12 @@ const Dashboard = () => {
                     </div>
                 </section>
 
-                        {/* This is to show message */}
-                        { error && <section className='bg-red-300 font-bold  h-7 flex flex-row justify-center'>
-                            {error}
-                    </section>
-                        }
-                    
+                {/* This is to show message */}
+                {error && <section className='bg-red-300 font-bold  h-7 flex flex-row justify-center'>
+                    {error}
+                </section>
+                }
+
                 {/* This is for if current use is admin or he is manager no form for tech*/}
                 {/* {(currentUserRole == 3 || currentUserRole == 2) && showForm && <div>
                     <div className="flex flex-col content-center justify-center">
@@ -449,7 +476,7 @@ const Dashboard = () => {
                 }
 
                 {/* To create new doctor */}
-                {currentUserRole == 0 && createNewDoctor && <div>
+                {/* {currentUserRole == 0 && createNewDoctor && <div>
                     <div className="flex flex-col content-center justify-center">
                         <section id='form' className='justify-center flex w-full items-center mt-20'>
                             <div className="form_container">
@@ -458,11 +485,11 @@ const Dashboard = () => {
 
                                     <form action="#">
                                         <div className="grid grid-cols-2 gap-5">
-                                            <input type="text" placeholder="Name" className="outline-none border border-gray-400 py-1 px-2" name='name' onChange={handleOnChangenewDoc} />
-                                            <input type="text" placeholder="Email" name='email' onChange={handleOnChangenewDoc} className="outline-none border border-gray-400 py-1 px-2" />
-                                        </div>
+                                            <input type="text" placeholder="Name" className="outline-none border border-gray-400 py-1 px-2" name='name'  name= "" onChange={handleOnChangenewDoc} />
+                                            <input type="text" placeholder="Email" name='email'  name= "" onChange={handleOnChangenewDoc} className="outline-none border border-gray-400 py-1 px-2" />
+                                        </div> */}
 
-                                        <div className="grid grid-cols-2 gap-5 mt-6">
+                                        {/* <div className="grid grid-cols-2 gap-5 mt-6"> */}
                                             {/* {currentUserRole && currentUserRole == 3 ? <div>
                                                 <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
                                                     <option value="1">Tech</option>
@@ -476,7 +503,7 @@ const Dashboard = () => {
                                             </div>
                                             } */}
 
-                                        </div>
+                                        {/* </div>
                                         <div className="mt-5">
                                             <h3 className="text-red-700 font-bold text-xl capitalize">
                                                 {error}
@@ -493,7 +520,128 @@ const Dashboard = () => {
                             </div>
                         </section >
                     </div>
-                </div>}
+                </div>} */}
+
+                {currentUserRole == 0 && createNewDoctor &&
+                    <div class="flex justify-center bg-gray-100">
+                        <div class="w-50 p-6 bg-[#4fbae7] rounded-md shadow-lg my-4">
+                            <h2 class="text-2xl font-bold mb-4 text-center text-white font-serif">Doctor Registration</h2>
+                            <div class="flex justify-center">
+                                <div class="max-w-screen bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 pr-10 pl-10">
+                                    <h2 class="text-xl font-bold mb-4">Contact Details</h2>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="firstname">
+                                            First Name
+                                        </label>
+                                        <input
+                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="firstname" type="text"  name= "firstname" onChange={handleOnChangenewDoc}  placeholder="First Name" value={newDoc.firstname} />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="middlename">
+                                            Middle Name
+                                        </label>
+                                        <input
+                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="middlename" type="text"   name= "middlename" onChange={handleOnChangenewDoc} value={newDoc.midddlename} placeholder="Middle Name" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="lastname">
+                                            Last Name
+                                        </label>
+                                        <input
+                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="lastname" type="text"   name= "lastname" onChange={handleOnChangenewDoc} value={newDoc.lastname} placeholder="Last Name" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="email">
+                                            Email
+                                        </label>
+                                        <input
+                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="email" type="email"   name= "email" onChange={handleOnChangenewDoc} value={newDoc.email} placeholder="Email" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="phoneno">
+                                            Phone Number
+                                        </label>
+                                        <input
+                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="phoneno"   name= "phone" onChange={handleOnChangenewDoc} value={newDoc.phone} type="text" placeholder="Phone Number" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="profilephoto">Upload Profile
+                                            Picture</label>
+                                        <input
+                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="profilephoto" type="file" />
+                                    </div>
+                                </div>
+                                <div class="max-w-screen mx-4 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                                    <h2 class="text-xl font-bold mb-4 ">Career Details </h2>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="qualification">
+                                            Qualification
+                                        </label>
+                                        <input
+                                            class="shadow appearance-none border rounded py-2 pr-32 pl-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="qualification"   name= "qualification" onChange={handleOnChangenewDoc} value={newDoc.qualification} type="text" placeholder="Qualificaiton" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="specialty">
+                                            Specialty
+                                        </label>
+                                        <select   name= "specialty" onChange={handleOnChangenewDoc} 
+                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="specialty">
+                                            <option value="null" >Select a Specialty</option>
+                                            <option value="cardiology" >Cardiology</option>
+                                            <option value="dermatology" >Dermatology</option>
+                                            <option value="endocrinology" >Endocrinology</option>
+                                            <option value="gastroenterology" >Gastroenterology</option>
+                                            <option value="hematology" >Hematology</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="experience">
+                                            Experience
+                                        </label>
+                                        <input
+                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="experience"   name= "experience" onChange={handleOnChangenewDoc} value={newDoc.experience} type="number" placeholder="Years of Experience" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="license-number">
+                                            License Number
+                                        </label>
+                                        <input
+                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="license-number"   name= "license" onChange={handleOnChangenewDoc} value={newDoc.license} type="text" placeholder="License Number" />
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="address">
+                                            Address
+                                        </label>
+                                        <textarea
+                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="address"   name= "address" onChange={handleOnChangenewDoc} value={newDoc.address} placeholder="Address"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="license-number">
+                                            Preffered Domain
+                                        </label>
+                                        <input
+                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="license-number" type="text" placeholder="Preferred Domain"   name= "domain" onChange={handleOnChangenewDoc} value={newDoc.domain} />
+                                    </div>
+                                    <button onClick={createDoctor} type="submit"
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2 px-10 hover:ease-in hover:font-bold">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
 
                 {/* Dashboard section start */}
 
