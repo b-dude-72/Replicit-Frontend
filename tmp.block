@@ -1,0 +1,38 @@
+{currentUserRole == 2 && showForm && <div>
+                    {/* This is for if cuffent user is Manager */}
+                    <div className="flex flex-col content-center justify-center">
+                        <section id='form' className='justify-center flex w-full items-center mt-20'>
+                            <div className="form_container">
+                                <div class="w-full py-16 px-12 border-3 border-black bg-gray-100">
+                                    <h2 class="text-3xl mb-4">Create Mr</h2>
+
+                                    <form action="#">
+                                        <div class="grid grid-cols-2 gap-5">
+                                            <input type="text" placeholder="Name" class="outline-none border border-gray-400 py-1 px-2" />
+                                            <input type="text" placeholder="Email" class="outline-none border border-gray-400 py-1 px-2" />
+                                        </div>
+
+                                        <div class="grid grid-cols-2 gap-5 mt-6">
+                                            <input type="text" placeholder="Password" class="outline-none border border-gray-400 py-1 px-2 w-full" />
+                                            {currentUserRole && currentUserRole == 3 ? <div>
+                                                <select className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
+                                                    <option value="1">Tech</option>
+                                                    <option value="2" selected>Manager</option>
+                                                </select>
+                                            </div> : <div>
+
+                                            </div>
+                                            }
+
+                                        </div>
+                                        <div class="mt-5">
+                                            <button class="w-1/3 align-baseline content-center bg-purple-500 py-3 text-center text-white">Create Mr</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </section >
+                    </div>
+
+                </div>}
+

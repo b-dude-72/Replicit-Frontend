@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Doctor Registration</title>
+</head>
+<body>
+    <html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+
+    <body>
+
+        <div class="flex justify-center bg-gray-100">
+            <div class="w-50 p-6 bg-[#4fbae7] rounded-md shadow-lg my-4">
+                <h2 class="text-2xl font-bold mb-4 text-center text-white font-serif">Doctor Registration</h2>
+                <form class="flex justify-center">
+                    <div class="max-w-screen bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 pr-10 pl-10">
+                        <h2 class="text-xl font-bold mb-4">Contact Details</h2>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="firstname">
+                                First Name
+                            </label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="firstname" type="text" placeholder="First Name">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="middlename">
+                                Middle Name
+                            </label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="middlename" type="text" placeholder="Middle Name">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="lastname">
+                                Last Name
+                            </label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="lastname" type="text" placeholder="Last Name">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="email">
+                                Email
+                            </label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="email" type="email" placeholder="Email">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="phoneno">
+                                Phone Number
+                            </label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="phoneno" type="text" placeholder="Phone Number">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="profilephoto">Upload Profile
+                                Picture</label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="profilephoto" type="file">
+                        </div>
+                    </div>
+                    <div class="max-w-screen mx-4 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                        <h2 class="text-xl font-bold mb-4 ">Career Details </h2>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="qualification">
+                                Qualification
+                            </label>
+                            <input
+                                class="shadow appearance-none border rounded py-2 pr-32 pl-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="qualification" type="text" placeholder="Qualificaiton">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="specialty">
+                                Specialty
+                            </label>
+                            <select
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="specialty">
+                                <option>Select a Specialty</option>
+                                <option>Cardiology</option>
+                                <option>Dermatology</option>
+                                <option>Endocrinology</option>
+                                <option>Gastroenterology</option>
+                                <option>Hematology</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="experience">
+                                Experience
+                            </label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="experience" type="number" placeholder="Years of Experience">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="license-number">
+                                License Number
+                            </label>
+                            <input
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="license-number" type="text" placeholder="License Number">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="address">
+                                Address
+                            </label>
+                            <textarea
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="address" placeholder="Address"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2 px-10 hover:ease-in hover:font-bold">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </body>
+
+    </html>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Member Registration</title>
+</head>
+<body>
+  <div class="max-w-md mx-auto mt-6">
+    <form class="bg-[#4fbae7] shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <h2 class="text-2xl font-bold mb-4 text-center text-white">Member Registration</h2>
+      <div class="max-w-screen bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 pr-10 pl-10">
+        <div class="mb-4">
+          <label class="block font-bold mb-2" for="firstname">
+            First Name
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            id="firstname" type="text" placeholder="First Name">
+        </div>
+        <div class="mb-4">
+          <label class="block font-bold mb-2" for="lastname">
+            Last Name
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            id="lastname" type="text" placeholder="Last Name">
+        </div>
+        <div class="mb-4">
+          <label class="block font-bold mb-2" for="position">
+            Position
+          </label>
+          <select
+            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            id="position">
+            <option>Select a Specialty</option>
+            <option>MR</option>
+            <option>Manager</option>
+            <option>Tech</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label class="block font-bold mb-2" for="email">
+            Email ID
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            id="email" type="email" placeholder="Email ID" required>
+        </div>
+        <div class="mb-4">
+          <label class="block font-bold mb-2" for="password">
+            Password
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            id="password" type="password" placeholder="Password" required>
+        </div>
+        <button type="submit"
+          class="text-white bg-blue-900 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
+          Member</button>
+      </div>
+  </div>
+  </form>
+</body>
+</html>
