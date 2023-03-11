@@ -102,7 +102,7 @@ const Requests = () => {
                         {show ==false &&
                         <div>
                             <p>All Requests</p>
-                            <table className='mx-5 mt-5'>
+                            <table className='mx-5 mt-5 min-w-full'>
                             <thead class="bg-white border-2">
                                 <tr>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -125,7 +125,7 @@ const Requests = () => {
                         {show==true &&
                         <div>
                             <p>Your requests Requests</p>
-                            <table className='mx-5 mt-5'>
+                            <table className='mx-5 mt-5 min-w-full' >
                             <thead class="bg-white border-2">
                                 <tr>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">

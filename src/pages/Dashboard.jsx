@@ -11,7 +11,12 @@ const Dashboard = () => {
     const [currUser, setCurrUser] = useState();
     const [createNewDoctor, setCreateNewDoctor] = useState(false);
     const [drs, SetDrs] = useState([]);
-    const [showForm, setShowForm] = useState(false)
+    const [mydrs, setMyDrs] = useState([]);
+    const [showForm, setShowForm] = useState(true)
+     /*
+     show = true -> show your docs
+     show = false -> show all docs
+    */
     const [newMember, setNewMember] = useState({
         firstname: "",
         lastname: "",
@@ -19,18 +24,19 @@ const Dashboard = () => {
         password: "",
         role: ""
     })
+
     const [newDoc, setNewDoc] = useState({
-        firstname:"",
-        middlename:"",
-        lastname:"",
-        phone:"",
-        email:"",
-        qualification:"",
-        speciality:"",
-        experience:"",
-        license:"",
-        domain:"",
-        address:""
+        firstname: "",
+        middlename: "",
+        lastname: "",
+        phone: "",
+        email: "",
+        qualification: "",
+        speciality: "",
+        experience: "",
+        license: "",
+        domain: "",
+        address: ""
     })
     const [error, setError] = useState();
     let currentUserId;
@@ -50,9 +56,6 @@ const Dashboard = () => {
     }
 
 
-
-
-
     const getAllDocs = () => {
 
         const requestOptions = {
@@ -68,12 +71,28 @@ const Dashboard = () => {
     }
 
 
+    const getAllDocsMr = () => {
+
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localAuth
+            },
+        };
+        fetch(`${process.env.REACT_APP_URL}/api/auth/notapproveddrsmr`, requestOptions)
+            .then(response => response.json())
+            .then(data => setMyDrs(data.drs));
+    }
+
+
     useEffect(() => {
         if (!localAuth) {
             navigate('/login')
         }
         getAllDocs();
         getCurrentUserData();
+        getAllDocsMr();
     }, [])
 
 
@@ -217,17 +236,17 @@ const Dashboard = () => {
                 mrID: mr,
                 manager: manager,
                 adminID: admin,
-                firstname:newDoc.firstname,
-                middlename:newDoc.middlename,
-                lastname:newDoc.lastname,
-                phone:newDoc.phone,
-                email:newDoc.email,
-                qualification:newDoc.qualification,
-                speciality:newDoc.speciality,
-                experience:newDoc.experience,
-                license:newDoc.license,
-                domain:newDoc.domain,
-                address:newDoc.address,
+                firstname: newDoc.firstname,
+                middlename: newDoc.middlename,
+                lastname: newDoc.lastname,
+                phone: newDoc.phone,
+                email: newDoc.email,
+                qualification: newDoc.qualification,
+                speciality: newDoc.speciality,
+                experience: newDoc.experience,
+                license: newDoc.license,
+                domain: newDoc.domain,
+                address: newDoc.address,
             })
         };
         fetch(`${process.env.REACT_APP_URL}/api/auth/createdr`, requestOptions)
@@ -244,17 +263,17 @@ const Dashboard = () => {
         // Here the auth token returnd by the seevr wil no use coz 
         // we wil give tech or manager their user name and password not auth token
         setNewDoc({
-                firstname:"",
-            middlename:"",
-            lastname:"",
-            phone:"",
-            email:"",
-            qualification:"",
-            speciality:"",
-            experience:"",
-            license:"",
-            domain:"",
-            address:""
+            firstname: "",
+            middlename: "",
+            lastname: "",
+            phone: "",
+            email: "",
+            qualification: "",
+            speciality: "",
+            experience: "",
+            license: "",
+            domain: "",
+            address: ""
         })
         setTimeout(() => {
             setError("")
@@ -285,6 +304,13 @@ const Dashboard = () => {
     // console.log(currentUseradminID)
     console.log(currUser)
     // console.log("new member "  +  newMember.name)
+
+    const [show, setShow] = useState(false);
+    /*
+    show = false -> show all docs
+    show = true -> show my docs
+    */
+
     return (
         <>
             <Sidebar />
@@ -489,8 +515,8 @@ const Dashboard = () => {
                                             <input type="text" placeholder="Email" name='email'  name= "" onChange={handleOnChangenewDoc} className="outline-none border border-gray-400 py-1 px-2" />
                                         </div> */}
 
-                                        {/* <div className="grid grid-cols-2 gap-5 mt-6"> */}
-                                            {/* {currentUserRole && currentUserRole == 3 ? <div>
+                {/* <div className="grid grid-cols-2 gap-5 mt-6"> */}
+                {/* {currentUserRole && currentUserRole == 3 ? <div>
                                                 <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
                                                     <option value="1">Tech</option>
                                                     <option value="2" defaultValue>Manager</option>
@@ -503,7 +529,7 @@ const Dashboard = () => {
                                             </div>
                                             } */}
 
-                                        {/* </div>
+                {/* </div>
                                         <div className="mt-5">
                                             <h3 className="text-red-700 font-bold text-xl capitalize">
                                                 {error}
@@ -535,7 +561,7 @@ const Dashboard = () => {
                                         </label>
                                         <input
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="firstname" type="text"  name= "firstname" onChange={handleOnChangenewDoc}  placeholder="First Name" value={newDoc.firstname} />
+                                            id="firstname" type="text" name="firstname" onChange={handleOnChangenewDoc} placeholder="First Name" value={newDoc.firstname} />
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-bold mb-2" for="middlename">
@@ -543,7 +569,7 @@ const Dashboard = () => {
                                         </label>
                                         <input
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="middlename" type="text"   name= "middlename" onChange={handleOnChangenewDoc} value={newDoc.midddlename} placeholder="Middle Name" />
+                                            id="middlename" type="text" name="middlename" onChange={handleOnChangenewDoc} value={newDoc.midddlename} placeholder="Middle Name" />
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-bold mb-2" for="lastname">
@@ -551,7 +577,7 @@ const Dashboard = () => {
                                         </label>
                                         <input
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="lastname" type="text"   name= "lastname" onChange={handleOnChangenewDoc} value={newDoc.lastname} placeholder="Last Name" />
+                                            id="lastname" type="text" name="lastname" onChange={handleOnChangenewDoc} value={newDoc.lastname} placeholder="Last Name" />
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-bold mb-2" for="email">
@@ -559,7 +585,7 @@ const Dashboard = () => {
                                         </label>
                                         <input
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="email" type="email"   name= "email" onChange={handleOnChangenewDoc} value={newDoc.email} placeholder="Email" />
+                                            id="email" type="email" name="email" onChange={handleOnChangenewDoc} value={newDoc.email} placeholder="Email" />
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-bold mb-2" for="phoneno">
@@ -567,7 +593,7 @@ const Dashboard = () => {
                                         </label>
                                         <input
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="phoneno"   name= "phone" onChange={handleOnChangenewDoc} value={newDoc.phone} type="text" placeholder="Phone Number" />
+                                            id="phoneno" name="phone" onChange={handleOnChangenewDoc} value={newDoc.phone} type="text" placeholder="Phone Number" />
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-bold mb-2" for="profilephoto">Upload Profile
@@ -585,13 +611,13 @@ const Dashboard = () => {
                                         </label>
                                         <input
                                             class="shadow appearance-none border rounded py-2 pr-32 pl-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="qualification"   name= "qualification" onChange={handleOnChangenewDoc} value={newDoc.qualification} type="text" placeholder="Qualificaiton" />
+                                            id="qualification" name="qualification" onChange={handleOnChangenewDoc} value={newDoc.qualification} type="text" placeholder="Qualificaiton" />
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-bold mb-2" for="specialty">
                                             Specialty
                                         </label>
-                                        <select   name= "specialty" onChange={handleOnChangenewDoc} 
+                                        <select name="specialty" onChange={handleOnChangenewDoc}
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                             id="specialty">
                                             <option value="null" >Select a Specialty</option>
@@ -608,7 +634,7 @@ const Dashboard = () => {
                                         </label>
                                         <input
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="experience"   name= "experience" onChange={handleOnChangenewDoc} value={newDoc.experience} type="number" placeholder="Years of Experience" />
+                                            id="experience" name="experience" onChange={handleOnChangenewDoc} value={newDoc.experience} type="number" placeholder="Years of Experience" />
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-bold mb-2" for="license-number">
@@ -616,16 +642,16 @@ const Dashboard = () => {
                                         </label>
                                         <input
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="license-number"   name= "license" onChange={handleOnChangenewDoc} value={newDoc.license} type="text" placeholder="License Number" />
+                                            id="license-number" name="license" onChange={handleOnChangenewDoc} value={newDoc.license} type="text" placeholder="License Number" />
                                     </div>
-                                    
+
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-bold mb-2" for="address">
                                             Address
                                         </label>
                                         <textarea
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="address"   name= "address" onChange={handleOnChangenewDoc} value={newDoc.address} placeholder="Address"></textarea>
+                                            id="address" name="address" onChange={handleOnChangenewDoc} value={newDoc.address} placeholder="Address"></textarea>
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-bold mb-2" for="license-number">
@@ -633,7 +659,7 @@ const Dashboard = () => {
                                         </label>
                                         <input
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="license-number" type="text" placeholder="Preferred Domain"   name= "domain" onChange={handleOnChangenewDoc} value={newDoc.domain} />
+                                            id="license-number" type="text" placeholder="Preferred Domain" name="domain" onChange={handleOnChangenewDoc} value={newDoc.domain} />
                                     </div>
                                     <button onClick={createDoctor} type="submit"
                                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2 px-10 hover:ease-in hover:font-bold">Submit</button>
@@ -696,32 +722,67 @@ const Dashboard = () => {
                     </div>
                 </div>
 
+                <section className='flex flex-row w-full justify-around bg-red-500'>
+                    <p className='cursor-pointer bg-yellow-200' onClick={() => { setShow(true) }} >Your Doctors</p>
+                    <p className='cursor-pointer bg-yellow-200' onClick={() => { setShow(false) }} >All Doctos</p>
+                </section>
                 {/* table */}
                 <div class="flex flex-col">
                     <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
                         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                             <div class="overflow-hidden">
-                                <table class="min-w-full">
-                                    <thead class="bg-white border-b">
-                                        <tr>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Name
-                                            </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Email
-                                            </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Status
-                                            </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Message
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <Dashbordtable drs={drs} />
-                                    </tbody>
-                                </table>
+                                {show==true &&
+                                    <div>
+                                        <p>All Your Rejected doctors</p>
+                                        <table class="min-w-full">
+                                            <thead class="bg-white border-b">
+                                                <tr>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Name
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Email
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Status
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Message
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <Dashbordtable drs={mydrs} />
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                                { show == false &&
+                                    <div>
+                                        <p>All rejected doctors</p>
+                                        <table class="min-w-full">
+                                            <thead class="bg-white border-b">
+                                                <tr>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Name
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Email
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Status
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Message
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <Dashbordtable drs={drs} />
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
