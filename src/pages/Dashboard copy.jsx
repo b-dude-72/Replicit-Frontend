@@ -13,8 +13,7 @@ const Dashboard = () => {
     const [drs, SetDrs] = useState([]);
     const [showForm, setShowForm] = useState(false)
     const [newMember, setNewMember] = useState({
-        firstname: "",
-        lastname: "",
+        name: "",
         email: "",
         password: "",
         role: ""
@@ -40,7 +39,7 @@ const Dashboard = () => {
             .then(data => setCurrUser(data));
     }
 
-
+    
 
 
 
@@ -96,7 +95,7 @@ const Dashboard = () => {
     // console.log(currUser)
     if (currUser) {
         currentUserRole = currUser.user.role;
-
+        
     }
 
 
@@ -140,6 +139,14 @@ const Dashboard = () => {
             .then((data) => {
                 if (data.error) {
                     setError(data.error)
+                } else {
+                    setError("User Created")
+                    setNewMember({
+                        name: "",
+                        email: "",
+                        password: "",
+                        role: ""
+                    })
                 }
             });
         // Here the auth token returnd by the seevr wil no use coz 
@@ -154,25 +161,16 @@ const Dashboard = () => {
         // here we will do  api submit call
         // console.log(newMember)
         let manager = "currentadmin"; // coz we are creating again and tech memeber
-        submitToDb(currentUserId, newMember.firstname, newMember.lastname, newMember.email, newMember.password, newMember.role, manager, endpoint)
-        // setNewMember({
-        //     firstname: "",
-        //     email: "",
-        //     password: "",
-        //     role: "",
-        //     lastname: ""
-        // })
-        setError("User Created")
+        submitToDb(currentUserId, newMember.name, newMember.email, newMember.password, newMember.role, manager, endpoint)
         setNewMember({
-            firstname: "",
-            lastname:"",
+            name: "",
             email: "",
             password: "",
             role: ""
         })
         setTimeout(() => {
             setError("")
-        }, 5000);
+        }, 4000);
     }
 
     const createnewMr = (e) => {
@@ -187,9 +185,7 @@ const Dashboard = () => {
         // which be the adminId of current user at manager will have a adin id with it
         let adminID = currentUseradminID;
 
-        // console.log(newMember)
-
-        submitToDb(adminID, newMember.firstname, newMember.lastname, newMember.email, newMember.password, newMember.role, currentUserId, endpoint)
+        submitToDb(adminID, newMember.name, newMember.email, newMember.password, newMember.role, currentUserId, endpoint)
 
 
     }
@@ -263,18 +259,18 @@ const Dashboard = () => {
             <Sidebar />
             <div className="flex flex-col w-full">
 
-                <section className="header_dashboard bg-green-600 h-12 w-full px-2 flex">
-                    <div className="flex flex-row items-center h-full justify-between w-full font-sans text-xl text-black ">
-                        <div className="username">
-                            {currUser && <p className='text-xs '>Hello <span className=' hover:font-bold text-base text-black italic '>{currUser.user.name}</span></p>}
+                <section className="header_dashboard bg-[#4fbae7] h-12 w-full px-2 flex">
+                    <div className="flex flex-row items-center h-full justify-between w-full font-sans text-xl text-black  ">
+                    <div className="username ">
+                            {currUser && <p className='text-xs '><span className='font-bold text-base text-grey-700  text-black mr-1'>User:</span><span className='hover:underline capitalize text-base font-serif text-white'>{currUser.user.name}</span></p>}
                         </div>
                         <div className="userrole">
-                            {currUser && <p className='text-xs'>Role <span className='font-bold text-base text-grey-700 italic text-red-900'>{role_mapping(currUser.user.role)}</span></p>}
+                            {currUser && <p className='text-xs'><span className='font-bold text-base text-grey-700  text-black mr-1'>Role:</span> <span className='hover:underline uppercase text-base text-grey-700 font-serif text-white'>{role_mapping(currUser.user.role)}</span></p>}
                         </div>
                         {currentUserRole == 3 || currentUserRole == 2 ?
                             <div>
                                 <div className="actionbutton">
-                                    <a className='text-sm text-white px-7 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer'
+                                    <a className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer'
                                         onClick={() => {
                                             if (showForm) {
                                                 setShowForm(false)
@@ -294,7 +290,7 @@ const Dashboard = () => {
                         {currentUserRole == 0 ?
                             <div>
                                 <div className="actionbutton">
-                                    <a className='text-sm text-white px-7 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer'
+                                    <a className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer'
                                         onClick={() => {
                                             if (createNewDoctor) {
                                                 setCreateNewDoctor(false)
@@ -315,19 +311,13 @@ const Dashboard = () => {
                     </div>
                 </section>
 
-                        {/* This is to show message */}
-                        { error && <section className='bg-red-300 font-bold  h-7 flex flex-row justify-center'>
-                            {error}
-                    </section>
-                        }
-                    
                 {/* This is for if current use is admin or he is manager no form for tech*/}
-                {/* {(currentUserRole == 3 || currentUserRole == 2) && showForm && <div>
+                {(currentUserRole == 3 || currentUserRole == 2) && showForm && <div>
                     <div className="flex flex-col content-center justify-center">
                         <section id='form' className='justify-center flex w-full items-center mt-20'>
                             <div className="form_container">
                                 <div className="w-full py-16 px-12 border-3 border-black bg-gray-100">
-                                    <h2 className="text-3xl mb-4">Create Member</h2>
+                                    <h2 className="text-2xl mb-4">Create Member</h2>
 
                                     <form action="#">
                                         <div className="grid grid-cols-2 gap-5">
@@ -336,7 +326,7 @@ const Dashboard = () => {
                                         </div>
 
                                         <div className="grid grid-cols-2 gap-5 mt-6">
-                                            <input type="text" name='password' onChange={handleOnChange} placeholder="Password" className="outline-none border border-gray-400 py-1 px-2 w-full" />
+                                            <input type="password" name='password' onChange={handleOnChange} placeholder="Password" className="outline-none border border-gray-400 py-1 px-2 w-full" />
                                             {currentUserRole && currentUserRole == 3 ? <div>
                                                 <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
                                                     <option value="1">Tech</option>
@@ -356,10 +346,10 @@ const Dashboard = () => {
                                                 {error}
                                             </h3>
                                         </div>
-                                        <div className="mt-5">
-                                            {currentUserRole == 3 ? <a onClick={createnewMemeber} className="cursor-pointer w-1/3 align-baseline content-center bg-purple-800 px-2 py-3 text-center text-white">
+                                        <div className="mt-7">
+                                            {currentUserRole == 3 ? <a onClick={createnewMemeber} className="text-sm text-white px-7 hover:bg-purple-700 py-3  border-red bg-purple-900 border-1 rounded-xl font-bold uppercase border-black cursor-pointer">
                                                 Create Member</a> :
-                                                <a onClick={createnewMr} className="cursor-pointer w-1/3 align-baseline content-center bg-purple-800 px-2 py-3 text-center text-white">
+                                                <a onClick={createnewMr} className="cursor-pointer w-1/3 align-baseline content-center  bg-purple-800 px-2 py-3 text-center text-white">
                                                     Create Mr</a>
                                             }
                                         </div>
@@ -368,86 +358,7 @@ const Dashboard = () => {
                             </div>
                         </section >
                     </div>
-                </div>} */}
-                {
-                    (currentUserRole == 3 || currentUserRole == 2) && showForm &&
-
-
-                    <div class="max-w-md mx-auto mt-6">
-                        <div class="bg-[#4fbae7] shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                            <h2 class="text-2xl font-bold mb-4">Member Registration</h2>
-                            <h5 className='text-red-600'>{error}</h5>
-                            <div class="mb-4">
-                                <label class="block font-bold mb-2" for="firstname">
-                                    First Name
-                                </label>
-                                <input onChange={handleOnChange}
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="firstname" name='firstname' value={newMember.firstname} type="text" placeholder="First Name" />
-                            </div>
-                            <div class="mb-4">
-                                <label class="block font-bold mb-2" for="lastname">
-                                    Last Name
-                                </label>
-                                <input name="lastname" onChange={handleOnChange}
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="lastname" type="text" value={newMember.lastname} placeholder="Last Name" />
-                            </div>
-                            <div class="mb-4">
-                                <label class="block font-bold mb-2" for="position">
-                                    Position
-                                </label>
-                                {/* <select
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="position">
-                                    <option>Select a Specialty</option>
-                                    <option>MR</option>
-                                    <option>Manager</option>
-                                    <option>Tech</option>
-                                </select> */}
-                                {currentUserRole && currentUserRole == 3 ? <div>
-                                    <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
-                                        <option value="1">Tech</option>
-                                        <option value="2" defaultValue>Manager</option>
-                                    </select>
-                                </div> : <div>
-                                    <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
-                                        <option value="0">Choose Role</option>
-                                        <option value="0" >Mr</option>
-                                    </select>
-                                </div>
-                                }
-                            </div>
-                            <div class="mb-4">
-                                <label class="block font-bold mb-2" for="email">
-                                    Email ID
-                                </label>
-                                <input name='email' onChange={handleOnChange}
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="email" value={newMember.email
-                                    } type="email" placeholder="Email ID" />
-                            </div>
-                            <div class="mb-4">
-                                <label class="block font-bold mb-2" for="password">
-                                    Password
-                                </label>
-                                <input name='password' onChange={handleOnChange}
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="password" value={newMember.password} type="text" placeholder="Password" />
-                            </div>
-                            {/* <button type="submit"
-                                class="text-white bg-blue-900 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
-                                Member</button> */}
-                            {currentUserRole == 3 ? <a onClick={createnewMemeber} className="cursor-pointer w-1/3 align-baseline content-center bg-purple-800 px-2 py-3 text-center text-white">
-                                Create Member</a> :
-                                <a onClick={createnewMr} className="cursor-pointer w-1/3 align-baseline content-center bg-purple-800 px-2 py-3 text-center text-white">
-                                    Create Mr</a>
-                            }
-                        </div>
-                    </div>
-
-                }
-
+                </div>}
                 {/* To create new doctor */}
                 {currentUserRole == 0 && createNewDoctor && <div>
                     <div className="flex flex-col content-center justify-center">
