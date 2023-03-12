@@ -67,7 +67,7 @@ const Dashbordtable = ({drs}) => {
                 
                 drs.map((currdr) => {
                     // console.log("currdr " + currdr.firstname)
-                    const { firstname,middlename,lastname, email, status,rejectmessage } = currdr;
+                    const { firstname,middlename,lastname, email, phone,status,rejectmessage } = currdr;
                     return (
                         <tr class="bg-gray-100 border-b">
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -81,6 +81,9 @@ const Dashbordtable = ({drs}) => {
                             </td>
                             <td class="text-sm text-gray-899 font-light px-6 py-4 whitespace-nowrap">
                               {email} 
+                            </td>
+                            <td class="text-sm text-gray-899 font-light px-6 py-4 whitespace-nowrap">
+                              {phone} 
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 {status}

@@ -77,10 +77,11 @@ const Manager = () => {
     if (currUser) {
         currentUserRole = currUser.user.role;
         console.log(currUser.user._id)
-        if(!(currentUserRole == 2 ||  currentUserRole == 3 || currentUserRole == 1)){
-            navigate('/login')
+        if(!(currentUserRole == 2 ||  currentUserRole == 3 )){
+            navigate('/')
         }
     }
+    // console.log(currentUserRole)
     const [showMr,setShowMr] = useState(false);
     const [showDr,setShowDr] = useState(true);
 
@@ -110,7 +111,7 @@ const Manager = () => {
                         <table className='mx-5 mt-5'>
                             <thead class="bg-white border-2">
                                 <tr>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         First Name
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">

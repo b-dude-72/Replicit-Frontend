@@ -56,7 +56,8 @@ const Admin = () => {
                 'auth-token': localAuth
             },
         };
-        fetch(`${process.env.REACT_APP_URL}/api/auth/getdrs`, requestOptions)
+        // Pagination
+        fetch(`${process.env.REACT_APP_URL}/api/auth/getdrs?page=7`, requestOptions)
             .then(response => response.json())
             .then(data => SetDrs(data.items));
 
@@ -94,47 +95,17 @@ const Admin = () => {
                     </div>
                     {currUser && currentUserRole == 3 ? <div>
                         <div className="bg-pink-300 px-2 flex flex-row justify-around items-center">
-                        <div className="border-2 border-black bg-purple-500 py-1 px-2 text-white cursor-pointer" onClick={() => { setToShow(false) }}>
-                            Members
-                        </div>
-                        <div className="border-2 border-black bg-purple-500 py-1 px-2 text-white cursor-pointer" onClick={() => { setToShow(true); }}>
-                            Doctors
-                        </div>
-                    </div>
-
-                    {/* table */}
-                    {toShow ? <div class="flex flex-col">
-                        <div className="">All doctors</div>
-                        <div class="overflow-x">
-                            <div class="py-2 inline-block min-w-full">
-                                <div class="overflow-hidden">
-                                    <table class="min-w-full">
-                                        <thead class="bg-white border-b">
-                                            <tr>
-                                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                    Name
-                                                </th>
-                                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                    Email
-                                                </th>
-                                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                    Status
-                                                </th>
-                                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                    Message
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <AdminAllDrs drs={drs} />
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div className="border-2 border-black bg-purple-500 py-1 px-2 text-white cursor-pointer" onClick={() => { setToShow(false) }}>
+                                Members
+                            </div>
+                            <div className="border-2 border-black bg-purple-500 py-1 px-2 text-white cursor-pointer" onClick={() => { setToShow(true); }}>
+                                Doctors
                             </div>
                         </div>
-                    </div> :
-                        <div class="flex flex-col">
-                            <div className="">All Members</div>
+
+                        {/* table */}
+                        {toShow ? <div class="flex flex-col">
+                            <div className="">All doctors</div>
                             <div class="overflow-x">
                                 <div class="py-2 inline-block min-w-full">
                                     <div class="overflow-hidden">
@@ -142,32 +113,89 @@ const Admin = () => {
                                             <thead class="bg-white border-b">
                                                 <tr>
                                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        Name
+                                                        First Name
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Middle Name
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Last Name
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Phone
                                                     </th>
                                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                         Email
                                                     </th>
                                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        Role
+                                                        Qualification
                                                     </th>
                                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        Manager
+                                                        Specialty
                                                     </th>
                                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        Admin
+                                                        Expericence
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Preferred Domain
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Address
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        License
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Status
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <AdminAllMembers members={members} />
+                                                <AdminAllDrs drs={drs} />
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    }
-                    </div>:<p>Not allowd</p>}
+                        </div> :
+                            <div class="flex flex-col">
+                                <div className="">All Members</div>
+                                <div class="overflow-x">
+                                    <div class="py-2 inline-block min-w-full">
+                                        <div class="overflow-hidden">
+                                            <table class="min-w-full">
+                                                <thead class="bg-white border-b">
+                                                    <tr>
+                                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                            ID
+                                                        </th>
+                                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                            First Name
+                                                        </th>
+                                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                            Last Name
+                                                        </th>
+                                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                            Email
+                                                        </th>
+                                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                            Manager ID
+                                                        </th>
+                                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                            Admin ID
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <AdminAllMembers members={members} />
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div> : <p>Not allowd</p>}
                 </div>
             </div>
         </div>

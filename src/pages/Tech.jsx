@@ -43,7 +43,7 @@ const Tech = () => {
         fetch(`${process.env.REACT_APP_URL}/api/auth/approveddrs`, requestOptions)
             .then(response => response.json())
             // .then(data => // console.log(data.doctorsApproved));
-            .then(data => SetDrs(data.doctorsApproved));
+            .then(data => SetDrs(data.items));
 
     }
 
@@ -63,7 +63,12 @@ const Tech = () => {
     if (currUser) {
         currentUserRole = currUser.user.role;
         // // console.log(currentUserRole)
-    }
+        if(!(currentUserRole === 1 || currentUserRole === 3)){
+            navigate("/")
+        }
+    }   
+
+    console.log(drs)
 
     return (
         <>
@@ -74,22 +79,51 @@ const Tech = () => {
                     <h2 className='text-black text-center bg-slate-300 capitalize font-serif h-10 items-center justify-center flex  '>
                         All the requests for Tech here
                     </h2>
-                    {currUser && currentUserRole === 1?
+                    {currUser && 
                         <table className='mx-5 mt-5'>
                             <thead class="bg-white border-2">
                                 <tr>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        First Name
+                                    </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Name
+                                        Middle Name
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Last Name
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Phone
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Email
                                     </th>
-                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Reject message
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Qualification
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Specialty
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Expericence
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Preferred Domain
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Address
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        License
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Status
-                                        {/* <span>approved by manager</span> */}
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Reject Message
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Approve
                                     </th>
                                 </tr>
                             </thead>
@@ -97,12 +131,6 @@ const Tech = () => {
                                 <AlldrsForTech drs={drs} />
                             </tbody>
                         </table>
-                        :
-                        <div>
-                            <h3>Not Allowed</h3>
-                        </div>
-
-
                     }
                 </div>
             </div>

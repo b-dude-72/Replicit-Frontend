@@ -60,12 +60,11 @@ const RejectMessage = ({drs}) => {
                     // console.log("error")
                     setMessage(data.error)
                     setTimeout(() => {
-                        navigate(-1)
                     }, 1000);
                 } else {
                     // console.log("success")
                     setMessage("Status Modifed")
-                    navigate(-1)
+                    navigate("/tech")
                 }
             });
     }

@@ -12,7 +12,7 @@ const Dashboard = () => {
     const [createNewDoctor, setCreateNewDoctor] = useState(false);
     const [drs, SetDrs] = useState([]);
     const [mydrs, setMyDrs] = useState([]);
-    const [showForm, setShowForm] = useState(true)
+    const [showForm, setShowForm] = useState(false)
     /*
     show = true -> show your docs
     show = false -> show all docs
@@ -319,7 +319,7 @@ const Dashboard = () => {
         currentUserRole = currUser.user.role;
         // console.log("currsent user role: " + currentUserRole)
         // console.log("current user manager id: " + currUser.user.managerID)
-        // currentUserId = currUser.user._id
+        currentUserId = currUser.user._id
         currentUseradminID = currUser.user.adminID
         currentUserManagerID = currUser.user.managerID
     }
@@ -764,10 +764,19 @@ const Dashboard = () => {
                                             <thead class="bg-white border-b">
                                                 <tr>
                                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        Name
+                                                        Firstname
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        MiddleName
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Lastname
                                                     </th>
                                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                         Email
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Phone
                                                     </th>
                                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                         Status
