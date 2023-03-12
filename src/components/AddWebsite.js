@@ -61,6 +61,9 @@ const AddWebiste = ({ drs }) => {
                 } else {
                     // console.log("success")
                     setMessage("Status Modifed")
+                    setTimeout(() => {
+                        navigate("/websites")
+                    }, 3000);
                 }
             });
     }

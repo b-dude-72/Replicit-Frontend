@@ -72,16 +72,16 @@ const DoneWebsites = () => {
                         <table className='mx-5 mt-5'>
                             <thead class="bg-white border-2">
                                 <tr>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    {/* <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Name
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Email
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Status
+                                        Status */}
                                         {/* <span>approved by manager</span> */}
-                                    </th>
+                                    {/* </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Mr ID
                                     </th>
@@ -90,6 +90,45 @@ const DoneWebsites = () => {
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Website
+                                    </th> */}
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        First Name
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Middle Name
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Last Name
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Phone
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Email
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Qualification
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Specialty
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Expericence
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Preferred Domain
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Address
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        License
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Status
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        webiste
                                     </th>
                                 </tr>
                             </thead>

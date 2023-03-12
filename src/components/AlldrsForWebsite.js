@@ -58,7 +58,7 @@ const AlldrsForWebsites = ({ drs }) => {
                 {message && <p>{message}</p>}
                 {
                     drs.map((drs) => {
-                        const { _id, name, email, status } = drs;
+                        const { _id, firstname,lastname,phone, email, status } = drs;
                         const handleOnChange = (e) => {
                             // // console.log("clicked handleOnChange");
                             // // console.log(userData);
@@ -67,10 +67,16 @@ const AlldrsForWebsites = ({ drs }) => {
                         return (
                             <tr class="bg-gray-100 border-b" key={_id}>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                    {name}
+                                    {firstname}
+                                </td>
+                                <td class="text-sm text-gray-899 font-light px-6 py-4 whitespace-nowrap">
+                                    {lastname}
                                 </td>
                                 <td class="text-sm text-gray-899 font-light px-6 py-4 whitespace-nowrap">
                                     {email}
+                                </td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    {phone}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                     {status}

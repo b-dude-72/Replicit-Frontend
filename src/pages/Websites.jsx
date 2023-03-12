@@ -27,8 +27,6 @@ const Websites = () => {
         fetch(`${process.env.REACT_APP_URL}/api/auth/getmemberdetails`, requestOptions)
             .then(response => response.json())
             .then(data => setCurrUser(data));
-
-
     }
 
 
@@ -80,10 +78,16 @@ const Websites = () => {
                             <thead class="bg-white border-2">
                                 <tr>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Name
+                                        First Name
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Last Name
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Email
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Phone
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Status
