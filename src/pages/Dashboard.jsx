@@ -33,7 +33,7 @@ const Dashboard = () => {
         phone: "",
         email: "",
         qualification: "",
-        speciality: "",
+        specialty: "",
         experience: "",
         license: "",
         domain: "",
@@ -126,8 +126,8 @@ const Dashboard = () => {
     if (currUser) {
         currentUserRole = currUser.user.role;
         currentUserManagerID = currUser.user.managerID
-        console.log(currUser.user.firstname + " firstname")
-        console.log(currUser.user.managerID + " managerid")
+        // console.log(currUser.user.firstname + " firstname")
+        // console.log(currUser.user.managerID + " managerid")
 
     }
 
@@ -150,7 +150,7 @@ const Dashboard = () => {
 
 
     const createnewMr = (e) => {
-        console.log("createnewmr")
+        // console.log("createnewmr")
         e.preventDefault();
         let endpoint = "createmr"
         // // console.log("Form submit Clicked");
@@ -203,7 +203,7 @@ const Dashboard = () => {
             // .then(data => // console.log(data));
             .then((data) => {
                 if (data.error) {
-                    console.log("Error")
+                    // console.log("Error")
                     setError(data.error)
                 } else {
                     setError("Created " + data)
@@ -248,7 +248,7 @@ const Dashboard = () => {
         let admin = currentUseradminID;
         let mr = currentUserId;
         let manager = currUser.user.managerID;
-        console.log("current user manager id: " + manager)
+        // console.log("current user manager id: " + manager)
 
         // // console.log(admin + " " + mr + " " + manager + " " + newDoc.name + " " + newDoc.email);
         // // console.log(newDoc)
@@ -275,7 +275,7 @@ const Dashboard = () => {
                 phone: newDoc.phone,
                 email: newDoc.email,
                 qualification: newDoc.qualification,
-                speciality: newDoc.speciality,
+                specialty: newDoc.specialty,
                 experience: newDoc.experience,
                 license: newDoc.license,
                 domain: newDoc.domain,
@@ -317,9 +317,9 @@ const Dashboard = () => {
 
     if (currUser) {
         currentUserRole = currUser.user.role;
-        console.log("currsent user role: " + currentUserRole)
-        console.log("current user manager id: " + currUser.user.managerID)
-        currentUserId = currUser.user._id
+        // console.log("currsent user role: " + currentUserRole)
+        // console.log("current user manager id: " + currUser.user.managerID)
+        // currentUserId = currUser.user._id
         currentUseradminID = currUser.user.adminID
         currentUserManagerID = currUser.user.managerID
     }
@@ -591,7 +591,7 @@ const Dashboard = () => {
                                         </label>
                                         <input
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="middlename" type="text" name="middlename" onChange={handleOnChangenewDoc} value={newDoc.midddlename} placeholder="Middle Name" />
+                                            id="middlename" type="text" name="middlename" onChange={handleOnChangenewDoc} value={newDoc.middlename} placeholder="Middle Name" />
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-bold mb-2" for="lastname">
@@ -639,10 +639,10 @@ const Dashboard = () => {
                                         <label class="block text-gray-700 font-bold mb-2" for="specialty">
                                             Specialty
                                         </label>
-                                        <select name="specialty" onChange={handleOnChangenewDoc}
+                                        <select value={newMember.specialty} name="specialty" onChange={handleOnChangenewDoc}
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                             id="specialty">
-                                            <option value="null" >Select a Specialty</option>
+                                            <option value="" >Select a Specialty</option>
                                             <option value="cardiology" >Cardiology</option>
                                             <option value="dermatology" >Dermatology</option>
                                             <option value="endocrinology" >Endocrinology</option>
