@@ -4,8 +4,10 @@ import Sidebar from './components/Sidebar';
 import Admin from './pages/Admin';
 import Dashboard from './pages/Dashboard.jsx';
 import DoneWebsites from './pages/DoneWebsites';
+import ForgotPassword from './pages/ForgotPassword';
 import Login from './pages/Login.jsx';
 import Manager from './pages/Manager';
+import NotFound from './pages/NotFound';
 import Redirect from './pages/Redirect';
 import Requests from './pages/Requests';
 import Tech from './pages/Tech';
@@ -25,6 +27,8 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/websites" element={<Websites />} />
         <Route path="/donewebsites" element={<DoneWebsites />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="*" element={<NotFound/>} />
       </Routes>
 
     </div>
