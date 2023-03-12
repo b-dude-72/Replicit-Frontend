@@ -13,10 +13,11 @@ const Dashboard = () => {
     const [drs, SetDrs] = useState([]);
     const [mydrs, setMyDrs] = useState([]);
     const [showForm, setShowForm] = useState(true)
-     /*
-     show = true -> show your docs
-     show = false -> show all docs
-    */
+    /*
+    show = true -> show your docs
+    show = false -> show all docs
+   */
+
     const [newMember, setNewMember] = useState({
         firstname: "",
         lastname: "",
@@ -90,16 +91,16 @@ const Dashboard = () => {
         if (!localAuth) {
             navigate('/login')
         }
-        getAllDocs();
         getCurrentUserData();
+        getAllDocs();
         getAllDocsMr();
     }, [])
 
 
 
-    // console.log(currUser)
-    // console.log(typeof(currUser))
-    // console.log(currUser.user.name)
+    // // console.log(currUser)
+    // // console.log(typeof(currUser))
+
     // 3 -> admin
     // 2 -> manager
     // 1 -> tech 
@@ -108,7 +109,7 @@ const Dashboard = () => {
     let currentUseradminID;
     let currentUserManagerID;
     const role_mapping = (role) => {
-        // console.log(role)
+        // // console.log(role)
         const roles = {
             0: 'mr',
             1: 'Tech',
@@ -120,78 +121,50 @@ const Dashboard = () => {
     }
 
 
-    // console.log(drs)
-    // console.log(currUser)
+    // // console.log(drs)
+    // // console.log(currUser)
     if (currUser) {
         currentUserRole = currUser.user.role;
+        currentUserManagerID = currUser.user.managerID
+        console.log(currUser.user.firstname + " firstname")
+        console.log(currUser.user.managerID + " managerid")
 
     }
 
 
 
 
-    // console.log(currUser.user)
+    // // console.log(currUser.user)
     const handleOnChange = (e) => {
-        // console.log("clicked handleOnChange");
-        // console.log(userData);
+        // // console.log("clicked handleOnChange");
+        // // console.log(userData);
         setNewMember({ ...newMember, [e.target.name]: e.target.value })
     }
     const handleOnChangenewDoc = (e) => {
-        // console.log("clicked handleOnChange");
-        // console.log(userData);
-        // console.log(newDoc);
+        // // console.log("clicked handleOnChange");
+        // // console.log(userData);
+        // // console.log(newDoc);
         setNewDoc({ ...newDoc, [e.target.name]: e.target.value })
     }
-    // console.log(currentUserId)
+    // // console.log(currentUserId)
 
 
-    const submitToDb = (admin, name, email, password, role, manager, endpoint) => {
-        // POST request using fetch inside useEffect React hook
-
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': `${localAuth}`,
-            },
-            body: JSON.stringify({
-                adminID: admin,
-                name: name,
-                email: email,
-                password: password,
-                role: role,
-                managerID: manager
-            })
-        };
-        fetch(`${process.env.REACT_APP_URL}/api/auth/${endpoint}`, requestOptions)
-            .then(response => response.json())
-            // .then(data => console.log(data));
-            .then((data) => {
-                if (data.error) {
-                    setError(data.error)
-                }
-            });
-        // Here the auth token returnd by the seevr wil no use coz 
-        // we wil give tech or manager their user name and password not auth token
-
-    }
-
-    const createnewMemeber = (e) => {
+    const createnewMr = (e) => {
+        console.log("createnewmr")
         e.preventDefault();
-        let endpoint = "createmember" // to create mr
-        // console.log("Form submit Clicked");
+        let endpoint = "createmr"
+        // // console.log("Form submit Clicked");
         // here we will do  api submit call
-        // console.log(newMember)
-        let manager = "currentadmin"; // coz we are creating again and tech memeber
-        submitToDb(currentUserId, newMember.firstname, newMember.lastname, newMember.email, newMember.password, newMember.role, manager, endpoint)
-        // setNewMember({
-        //     firstname: "",
-        //     email: "",
-        //     password: "",
-        //     role: "",
-        //     lastname: ""
-        // })
-        setError("User Created")
+        // we are sending name email passwod role and admin id from the body// // console.log(newMember)
+        // getting curent manager id
+
+        // here th curent user wil be manager so teh current manager id will be the curent id of user and wil will also send the admin id in the body
+        // which be the adminId of current user at manager will have a adin id with it
+        let adminID = currentUseradminID;
+
+        // // console.log(newMember)
+
+        submitToDb(adminID, newMember.firstname, newMember.lastname, newMember.email, newMember.password, newMember.role, currentUserId, endpoint)
         setNewMember({
             firstname: "",
             lastname: "",
@@ -204,22 +177,82 @@ const Dashboard = () => {
         }, 5000);
     }
 
-    const createnewMr = (e) => {
+
+    const submitToDb = (admin, firstname, lastname, email, password, role, manager, endpoint) => {
+        // POST request using fetch inside useEffect React hook
+        // console.log("Subtodb")
+        // console.log(endpoint  + " endpoint")
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': `${localAuth}`,
+            },
+            body: JSON.stringify({
+                adminID: admin,
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                password: password,
+                role: role,
+                managerID: manager
+            })
+        };
+        fetch(`${process.env.REACT_APP_URL}/api/auth/${endpoint}`, requestOptions)
+            .then(response => response.json())
+            // .then(data => // console.log(data));
+            .then((data) => {
+                if (data.error) {
+                    console.log("Error")
+                    setError(data.error)
+                } else {
+                    setError("Created " + data)
+                }
+            });
+        // Here the auth token returnd by the seevr wil no use coz 
+        // we wil give tech or manager their user name and password not auth token
+    }
+    const createnewMemeber = (e) => {
         e.preventDefault();
-        let endpoint = "createmr"
-        // console.log("Form submit Clicked");
+        let endpoint = "createmember" // to create mr
+        // // console.log("Form submit Clicked");
         // here we will do  api submit call
-        // we are sending name email passwod role and admin id from the body// console.log(newMember)
-        // getting curent manager id
+        // // console.log(newMember)
+        let manager = currUser.user.managerID; // coz we are creating again and tech memeber
+        submitToDb(currentUserId, newMember.firstname, newMember.lastname, newMember.email, newMember.password, newMember.role, manager, endpoint)
+        // setNewMember({
+        //     firstname: "",
+        //     email: "",
+        //     password: "",
+        //     role: "",
+        //     lastname: ""
+        // }
+        setNewMember({
+            firstname: "",
+            lastname: "",
+            email: "",
+            password: "",
+            role: ""
+        })
+        setTimeout(() => {
+            setError("")
+        }, 5000);
+    }
 
-        // here th curent user wil be manager so teh current manager id will be the curent id of user and wil will also send the admin id in the body
-        // which be the adminId of current user at manager will have a adin id with it
-        let adminID = currentUseradminID;
 
-        // console.log(newMember)
 
-        submitToDb(adminID, newMember.firstname, newMember.lastname, newMember.email, newMember.password, newMember.role, currentUserId, endpoint)
 
+    const createDoctor = (e) => {
+        // // console.log("createDoctor")
+        e.preventDefault()
+        let admin = currentUseradminID;
+        let mr = currentUserId;
+        let manager = currUser.user.managerID;
+        console.log("current user manager id: " + manager)
+
+        // // console.log(admin + " " + mr + " " + manager + " " + newDoc.name + " " + newDoc.email);
+        // // console.log(newDoc)
+        submitToDbnewDoc(mr, manager, admin);
 
     }
 
@@ -234,7 +267,7 @@ const Dashboard = () => {
             },
             body: JSON.stringify({
                 mrID: mr,
-                manager: manager,
+                managerID: currUser.user.managerID,
                 adminID: admin,
                 firstname: newDoc.firstname,
                 middlename: newDoc.middlename,
@@ -251,7 +284,7 @@ const Dashboard = () => {
         };
         fetch(`${process.env.REACT_APP_URL}/api/auth/createdr`, requestOptions)
             .then(response => response.json())
-            // .then(data => console.log(data));
+            // .then(data => // console.log(data));
             .then((data) => {
                 if (data.error) {
                     setError(data.error)
@@ -281,29 +314,18 @@ const Dashboard = () => {
 
     }
 
-    const createDoctor = (e) => {
-        // console.log("createDoctor")
-        e.preventDefault()
-        let admin = currentUseradminID;
-        let mr = currentUserId;
-        let manager = currentUserManagerID;
-
-        // console.log(admin + " " + mr + " " + manager + " " + newDoc.name + " " + newDoc.email);
-        // console.log(newDoc)
-        submitToDbnewDoc(mr, manager, admin);
-
-    }
-
 
     if (currUser) {
         currentUserRole = currUser.user.role;
+        console.log("currsent user role: " + currentUserRole)
+        console.log("current user manager id: " + currUser.user.managerID)
         currentUserId = currUser.user._id
         currentUseradminID = currUser.user.adminID
         currentUserManagerID = currUser.user.managerID
     }
-    // console.log(currentUseradminID)
-    console.log(currUser)
-    // console.log("new member "  +  newMember.name)
+    // // console.log(currentUseradminID)
+    // console.log(currUser)
+    // // console.log("new member "  +  newMember.name)
 
     const [show, setShow] = useState(false);
     /*
@@ -319,7 +341,7 @@ const Dashboard = () => {
                 <section className="header_dashboard bg-green-600 h-12 w-full px-2 flex">
                     <div className="flex flex-row items-center h-full justify-between w-full font-sans text-xl text-black ">
                         <div className="username">
-                            {currUser && <p className='text-xs '>Hello <span className=' hover:font-bold text-base text-black italic '>{currUser.user.name}</span></p>}
+                            {currUser && <p className='text-xs '>Hello <span className=' hover:font-bold text-base text-black italic '>{currUser.user.firstname}</span></p>}
                         </div>
                         <div className="userrole">
                             {currUser && <p className='text-xs'>Role <span className='font-bold text-base text-grey-700 italic text-red-900'>{role_mapping(currUser.user.role)}</span></p>}
@@ -593,15 +615,15 @@ const Dashboard = () => {
                                         </label>
                                         <input
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="phoneno" name="phone" onChange={handleOnChangenewDoc} value={newDoc.phone} type="text" placeholder="Phone Number" />
+                                            id="phoneno" name="phone" onChange={handleOnChangenewDoc} value={newDoc.phone} type="number" placeholder="Phone Number" />
                                     </div>
-                                    <div class="mb-4">
+                                    {/* <div class="mb-4">
                                         <label class="block text-gray-700 font-bold mb-2" for="profilephoto">Upload Profile
                                             Picture</label>
                                         <input
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                             id="profilephoto" type="file" />
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div class="max-w-screen mx-4 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                                     <h2 class="text-xl font-bold mb-4 ">Career Details </h2>
@@ -723,7 +745,11 @@ const Dashboard = () => {
                 </div>
 
                 <section className='flex flex-row w-full justify-around bg-red-500'>
-                    <p className='cursor-pointer bg-yellow-200' onClick={() => { setShow(true) }} >Your Doctors</p>
+                    <p className={`cursor-pointer bg-yellow-200 `} 
+                    style={{
+                        display: currentUserRole > 0 ? "none" : "block",
+                    }} 
+                    onClick={() => { setShow(true) }} >Your Doctors</p>
                     <p className='cursor-pointer bg-yellow-200' onClick={() => { setShow(false) }} >All Doctos</p>
                 </section>
                 {/* table */}
@@ -731,7 +757,7 @@ const Dashboard = () => {
                     <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
                         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                             <div class="overflow-hidden">
-                                {show==true &&
+                                {show == true &&
                                     <div>
                                         <p>All Your Rejected doctors</p>
                                         <table class="min-w-full">
@@ -757,14 +783,20 @@ const Dashboard = () => {
                                         </table>
                                     </div>
                                 }
-                                { show == false &&
+                                {show == false &&
                                     <div>
                                         <p>All rejected doctors</p>
                                         <table class="min-w-full">
                                             <thead class="bg-white border-b">
                                                 <tr>
                                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        Name
+                                                        First Name
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Middle Name
+                                                    </th>
+                                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        Last Name
                                                     </th>
                                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                         Email

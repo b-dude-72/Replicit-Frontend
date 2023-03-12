@@ -13,6 +13,22 @@ const Requests = () => {
     show = false -> show all docs
     show = true -> show my docs
     */
+    const [currUser, setCurrUser] = useState();
+    const getCurrentUserData = () => {
+
+
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localAuth,
+            },
+        };
+        fetch(`${process.env.REACT_APP_URL}/api/auth/getmemberdetails`, requestOptions)
+            .then(response => response.json())
+            .then(data => setCurrUser(data));
+    }
+
 
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
@@ -51,8 +67,8 @@ const Requests = () => {
             );
     }
 
-    console.log(alldrs)
-    console.log(pageCount + " pageCount")
+    // console.log(alldrs)
+    // console.log(pageCount + " pageCount")
 
     useEffect(() => {
         if (!localAuth) {
@@ -60,8 +76,13 @@ const Requests = () => {
         }
         getAllDocs()
         getMyDocs();
+        getCurrentUserData();
     }, [page])
 
+    let currentUserRole;
+    if(currUser){
+        currentUserRole = currUser.user.role;
+    }
 
     function handlePrevious() {
         setPage((p) => {
@@ -82,7 +103,7 @@ const Requests = () => {
         })
     }
 
-    console.log(myDrs)
+    // console.log(myDrs)
 
     return (
         <>
@@ -97,7 +118,11 @@ const Requests = () => {
                         </h2>
                         <section className='flex flex-row w-full justify-around bg-red-500'>
                             <p className='cursor-pointer bg-yellow-200' onClick={()=>{setShow(false)}} >All Requests</p>
-                            <p className='cursor-pointer bg-yellow-200' onClick={()=>{setShow(true)}} >Your Requests</p>
+                            <p
+                            style={{
+                                display: currentUserRole > 0 ? "none" : "block",
+                            }} 
+                            className='cursor-pointer bg-yellow-200' onClick={()=>{setShow(true)}} >Your Requests</p>
                         </section>
                         {show ==false &&
                         <div>
@@ -106,10 +131,37 @@ const Requests = () => {
                             <thead class="bg-white border-2">
                                 <tr>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Name
+                                        First Name
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Middle Name
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Last Name
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Phone
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Email
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Qualification
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Specialty
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Expericence
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Preferred Domain
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Address
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        License
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Status

@@ -55,8 +55,8 @@ const Manager = () => {
 
 
 
-    // console.log(drs)
-    // console.log(currUser)
+    // // console.log(drs)
+    // // console.log(currUser)
     if (currUser) {
         currentUserRole = currUser.user.role;
 

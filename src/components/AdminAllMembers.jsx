@@ -2,9 +2,9 @@
 
 
 const AdminAllMembers = ({ members }) => {
-    console.log(members)
+    // console.log(members)
     const role_mapping = (role) => {
-        // console.log(role)
+        // // console.log(role)
         const roles = {
             0: 'mr',
             1: 'Tech',

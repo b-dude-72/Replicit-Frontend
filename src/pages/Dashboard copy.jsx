@@ -68,9 +68,9 @@ const Dashboard = () => {
 
 
 
-    // console.log(currUser)
-    // console.log(typeof(currUser))
-    // console.log(currUser.user.name)
+    // // console.log(currUser)
+    // // console.log(typeof(currUser))
+    // // console.log(currUser.user.name)
     // 3 -> admin
     // 2 -> manager
     // 1 -> tech 
@@ -79,7 +79,7 @@ const Dashboard = () => {
     let currentUseradminID;
     let currentUserManagerID;
     const role_mapping = (role) => {
-        // console.log(role)
+        // // console.log(role)
         const roles = {
             0: 'mr',
             1: 'Tech',
@@ -91,8 +91,8 @@ const Dashboard = () => {
     }
 
 
-    // console.log(drs)
-    // console.log(currUser)
+    // // console.log(drs)
+    // // console.log(currUser)
     if (currUser) {
         currentUserRole = currUser.user.role;
         
@@ -101,18 +101,18 @@ const Dashboard = () => {
 
 
 
-    // console.log(currUser.user)
+    // // console.log(currUser.user)
     const handleOnChange = (e) => {
-        // console.log("clicked handleOnChange");
-        // console.log(userData);
+        // // console.log("clicked handleOnChange");
+        // // console.log(userData);
         setNewMember({ ...newMember, [e.target.name]: e.target.value })
     }
     const handleOnChangenewDoc = (e) => {
-        // console.log("clicked handleOnChange");
-        // console.log(userData);
+        // // console.log("clicked handleOnChange");
+        // // console.log(userData);
         setNewDoc({ ...newDoc, [e.target.name]: e.target.value })
     }
-    // console.log(currentUserId)
+    // // console.log(currentUserId)
 
 
     const submitToDb = (admin, name, email, password, role, manager, endpoint) => {
@@ -135,7 +135,7 @@ const Dashboard = () => {
         };
         fetch(`${process.env.REACT_APP_URL}/api/auth/${endpoint}`, requestOptions)
             .then(response => response.json())
-            // .then(data => console.log(data));
+            // .then(data => // console.log(data));
             .then((data) => {
                 if (data.error) {
                     setError(data.error)
@@ -157,9 +157,9 @@ const Dashboard = () => {
     const createnewMemeber = (e) => {
         e.preventDefault();
         let endpoint = "createmember" // to create mr
-        // console.log("Form submit Clicked");
+        // // console.log("Form submit Clicked");
         // here we will do  api submit call
-        // console.log(newMember)
+        // // console.log(newMember)
         let manager = "currentadmin"; // coz we are creating again and tech memeber
         submitToDb(currentUserId, newMember.name, newMember.email, newMember.password, newMember.role, manager, endpoint)
         setNewMember({
@@ -176,9 +176,9 @@ const Dashboard = () => {
     const createnewMr = (e) => {
         e.preventDefault();
         let endpoint = "createmr"
-        // console.log("Form submit Clicked");
+        // // console.log("Form submit Clicked");
         // here we will do  api submit call
-        // we are sending name email passwod role and admin id from the body// console.log(newMember)
+        // we are sending name email passwod role and admin id from the body// // console.log(newMember)
         // getting curent manager id
 
         // here th curent user wil be manager so teh current manager id will be the curent id of user and wil will also send the admin id in the body
@@ -209,7 +209,7 @@ const Dashboard = () => {
         };
         fetch(`${process.env.REACT_APP_URL}/api/auth/createdr`, requestOptions)
             .then(response => response.json())
-            // .then(data => console.log(data));
+            // .then(data => // console.log(data));
             .then((data) => {
                 if (data.error) {
                     setError(data.error)
@@ -233,12 +233,12 @@ const Dashboard = () => {
     }
 
     const createDoctor = () => {
-        console.log("createDoctor")
+        // console.log("createDoctor")
         let admin = currentUseradminID;
         let mr = currentUserId;
         let manager = currentUserManagerID;
 
-        console.log(admin + " " + mr + " " + manager + " " + newDoc.name + " " + newDoc.email);
+        // console.log(admin + " " + mr + " " + manager + " " + newDoc.name + " " + newDoc.email);
 
         submitToDbnewDoc(mr, manager, admin, newDoc.name, newDoc.email);
 
@@ -251,9 +251,9 @@ const Dashboard = () => {
         currentUseradminID = currUser.user.adminID
         currentUserManagerID = currUser.user.managerID
     }
-    // console.log(currentUseradminID)
-    console.log(currUser)
-    // console.log("new member "  +  newMember.name)
+    // // console.log(currentUseradminID)
+    // console.log(currUser)
+    // // console.log("new member "  +  newMember.name)
     return (
         <>
             <Sidebar />

@@ -42,7 +42,7 @@ const Tech = () => {
         };
         fetch(`${process.env.REACT_APP_URL}/api/auth/approveddrs`, requestOptions)
             .then(response => response.json())
-            // .then(data => console.log(data.doctorsApproved));
+            // .then(data => // console.log(data.doctorsApproved));
             .then(data => SetDrs(data.doctorsApproved));
 
     }
@@ -58,11 +58,11 @@ const Tech = () => {
 
 
 
-    // console.log(drs)
-    // console.log(currUser)
+    // // console.log(drs)
+    // // console.log(currUser)
     if (currUser) {
         currentUserRole = currUser.user.role;
-        // console.log(currentUserRole)
+        // // console.log(currentUserRole)
     }
 
     return (

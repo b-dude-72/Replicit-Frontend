@@ -45,7 +45,7 @@ const DoneWebsites = () => {
         };
         fetch(`${process.env.REACT_APP_URL}/api/auth/donewebsites`, requestOptions)
             .then(response => response.json())
-            // .then(data => console.log(data.doctorsDone));
+            // .then(data => // console.log(data.doctorsDone));
             .then(data => SetDrs(data.doctorsDone));
 
     }

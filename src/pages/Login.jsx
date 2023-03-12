@@ -18,7 +18,7 @@ const Login = () => {
 
     const submitForm = async (e) => {
         e.preventDefault();
-        console.log(cred)
+        // console.log(cred)
 
         const res = await fetch(`${process.env.REACT_APP_URL}/api/auth/login`, {
             method: 'POST',
@@ -39,7 +39,7 @@ const Login = () => {
             localStorage.setItem('auth-token', json.authtoken);
             navigate('/')
         }
-        console.log(json)
+        // console.log(json)
 
     }
 

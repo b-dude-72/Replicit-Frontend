@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Dashbordtable = ({drs}) => {
-
+    // console.log("srs: " + drs)
     let localAuth = localStorage.getItem('auth-token');
     let navigate = useNavigate();
 
@@ -13,7 +13,7 @@ const Dashbordtable = ({drs}) => {
     let docRole;
 
     const handleUpdate = (id, role) => {
-        console.log("curr id: " + id + " " + role);
+        // console.log("curr id: " + id + " " + role);
         docId = id;
         docRole = role;
         changeDoctorStatus(docId, docRole);
@@ -46,7 +46,7 @@ const Dashbordtable = ({drs}) => {
 
     }
 
-    // console.log(role)
+    // // console.log(role)
 
     if(message){
         setTimeout(() => {
@@ -59,13 +59,25 @@ const Dashbordtable = ({drs}) => {
 
     return (
         <>
+            {
+                console.log(drs.length)
+            }
+
              {
+                
                 drs.map((currdr) => {
-                    const { name, email, status,rejectmessage } = currdr;
+                    // console.log("currdr " + currdr.firstname)
+                    const { firstname,middlename,lastname, email, status,rejectmessage } = currdr;
                     return (
                         <tr class="bg-gray-100 border-b">
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                {name}
+                                {firstname}
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                {middlename}
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                {lastname}
                             </td>
                             <td class="text-sm text-gray-899 font-light px-6 py-4 whitespace-nowrap">
                               {email} 

@@ -28,17 +28,17 @@ const RejectMessage = ({drs}) => {
 
     if (currUser) {
         currentUserRole = currUser.user.role;
-        // console.log(currentUserRole)
+        // // console.log(currentUserRole)
     }
 
     const { _id, name, email, status } = drs;
 
     const [userWebsite, setUserWebsite] = useState("");
-    // console.log(userWebsite)
+    // // console.log(userWebsite)
 
     const submitWebsite = () => {
-        // console.log("subit website")
-        // console.log(userWebsite);
+        // // console.log("subit website")
+        // // console.log(userWebsite);
         addRejectMessage(_id,userWebsite);
     }
 
@@ -57,13 +57,13 @@ const RejectMessage = ({drs}) => {
             .then(response => response.json())
             .then((data) => {
                 if (data.error) {
-                    console.log("error")
+                    // console.log("error")
                     setMessage(data.error)
                     setTimeout(() => {
                         navigate(-1)
                     }, 1000);
                 } else {
-                    console.log("success")
+                    // console.log("success")
                     setMessage("Status Modifed")
                     navigate(-1)
                 }

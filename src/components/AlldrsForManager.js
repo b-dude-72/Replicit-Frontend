@@ -12,7 +12,7 @@ const AlldrsForManager = ({ drs }) => {
     let docRole;
 
     const handleUpdate = (id, role) => {
-        console.log("curr id: " + id + " " + role);
+        // console.log("curr id: " + id + " " + role);
         docId = id;
         docRole = role;
         changeDoctorStatus(docId, docRole);
@@ -41,7 +41,7 @@ const AlldrsForManager = ({ drs }) => {
             });
     }
 
-    // console.log(role)
+    // // console.log(role)
 
     if(message){
         setTimeout(() => {
@@ -57,8 +57,8 @@ const AlldrsForManager = ({ drs }) => {
                     drs.map((drs) => {
                         const { _id, name, email, status } = drs;
                         const handleOnChange = (e) => {
-                            // console.log("clicked handleOnChange");
-                            // console.log(userData);
+                            // // console.log("clicked handleOnChange");
+                            // // console.log(userData);
                             handleUpdate(_id, e.target.value)
                         }
                         return (
