@@ -205,7 +205,7 @@ const Dashboard = () => {
                 if (data.error) {
                     // console.log("Error")
                     console.log(data.error)
-                    setError("Check All the fields again")
+                    setError(data.error)
                     setNewMember({
                         firstname: newMember.firstname,
                         lastname: newMember.lastname,
