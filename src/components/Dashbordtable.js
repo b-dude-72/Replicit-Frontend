@@ -59,12 +59,10 @@ const Dashbordtable = ({drs}) => {
 
     return (
         <>
-            {
-                console.log(drs.length)
-            }
+            
 
              {
-                
+                drs && 
                 drs.map((currdr) => {
                     // console.log("currdr " + currdr.firstname)
                     const { firstname,middlename,lastname, email, phone,status,rejectmessage } = currdr;

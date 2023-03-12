@@ -204,9 +204,17 @@ const Dashboard = () => {
             .then((data) => {
                 if (data.error) {
                     // console.log("Error")
-                    setError(data.error)
+                    console.log(data.error)
+                    setError("Check All the fields again")
+                    setNewMember({
+                        firstname: newMember.firstname,
+                        lastname: newMember.lastname,
+                        email: newMember.email,
+                        password: newMember.password,
+                        role: ""
+                    })
                 } else {
-                    setError("Created " + data)
+                    setError("Created Member" )
                 }
             });
         // Here the auth token returnd by the seevr wil no use coz 
@@ -288,6 +296,20 @@ const Dashboard = () => {
             .then((data) => {
                 if (data.error) {
                     setError(data.error)
+                    setNewDoc({
+                        firstname: newDoc.firstname,
+                        middlename: newDoc.middlename,
+                        lastname: newDoc.lastname,
+                        phone: newDoc.phone,
+                        email: newDoc.email,
+                        qualification: newDoc.qualification,
+                        speciality: newDoc.specialty,
+                        experience: newDoc.experience,
+                        license: newDoc.license,
+                        domain: newDoc.domain,
+                        address:newDoc.address,
+                        role:newDoc.role
+                    })
                 } else {
                     setError("Doc Created")
 
