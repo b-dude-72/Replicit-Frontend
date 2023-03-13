@@ -229,8 +229,8 @@ const Requests = () => {
                 {show==false &&
 
                     <div className="page_control flex py-2 w-full bg-[#4fbae7] flex-row justify-around">
-                    <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer' disabled={page == 1} onClick={handlePrevious}>Previous</button>
-                    <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer' disabled={page == pageCount} onClick={handleNext}>Next</button>
+                    <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{cursor:page==1?"text":"pointer"}} disabled={page === 1} onClick={handlePrevious}>Previous</button>
+                    <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{cursor:page==pageCount?"pointer":"text"}} disabled={page === pageCount} onClick={handleNext}>Next</button>
                     {/* <b>pagge: {page}</b>
                 <b>page count: {pageCount}</b> */}
                 </div>
