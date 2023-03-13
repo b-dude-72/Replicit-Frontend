@@ -54,21 +54,25 @@ const Tech = () => {
         }
         getAllDocs();
         getCurrentUserData();
+
+        
+
     }, [])
 
 
+    console.log("length " + (drs.length))
 
     // // console.log(drs)
     // // console.log(currUser)
     if (currUser) {
         currentUserRole = currUser.user.role;
         // // console.log(currentUserRole)
-        if(!(currentUserRole === 1 || currentUserRole === 3)){
-            navigate("/")
+        if ((currentUserRole == 2 || currentUserRole == 3 || currentUserRole == 0)) {
+            navigate('/')
         }
     }   
 
-    console.log(drs)
+    // console.log(drs)
 
     return (
         <>
@@ -79,7 +83,14 @@ const Tech = () => {
                     <h2 className='text-black text-center bg-slate-300 capitalize font-serif h-10 items-center justify-center flex  '>
                         All the requests for Tech here
                     </h2>
-                    {currUser && 
+
+                    {
+                        drs.length == 0 && <div className="">
+                            No aproved drs
+                        </div>
+
+                    }
+                    {currUser && drs.length != 0 && 
                         <table className='mx-5 mt-5'>
                             <thead class="bg-white border-2">
                                 <tr>
