@@ -65,8 +65,8 @@ const DoneWebsites = () => {
             {/* only allowd to manager tech and admin not to MR */}
             <div className='flex flex-col w-full'>
                 <div className='w-full'>
-                    <h2 className='text-black text-center bg-slate-300 capitalize font-serif h-10 items-center justify-center flex  '>
-                        Done websites
+                    <h2 className='text-black text-center text-xl bg-slate-200 capitalize font-serif h-10 items-center justify-center flex  '>
+                        All the requests
                     </h2>
                     {currUser &&
                         <table className='mx-5 mt-5'>
@@ -80,7 +80,7 @@ const DoneWebsites = () => {
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Status */}
-                                        {/* <span>approved by manager</span> */}
+                                    {/* <span>approved by manager</span> */}
                                     {/* </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Mr ID

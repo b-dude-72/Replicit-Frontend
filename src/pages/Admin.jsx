@@ -90,22 +90,24 @@ const Admin = () => {
             <div>
                 {/* Show All users and slow all the form to admin */}
                 <div className="w-screen flex h-10 flex-col">
-                    <div className="bg-pink-300 w-full px-2 flex flex-col items-center">
-                        Adnin page
-                    </div>
+                    <h2 className='text-black text-center text-xl bg-slate-200 capitalize font-serif h-10 items-center justify-center flex py-3  '>
+                        Admin Page
+                    </h2>
                     {currUser && currentUserRole == 3 ? <div>
-                        <div className="bg-pink-300 px-2 flex flex-row justify-around items-center">
-                            <div className="border-2 border-black bg-purple-500 py-1 px-2 text-white cursor-pointer" onClick={() => { setToShow(false) }}>
+                        <div className="bg-white px-2 flex flex-row justify-around items-center">
+                            <div className="text-sm text-white px-4 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-bold uppercase border-black cursor-pointer mt-2" onClick={() => { setToShow(false) }}>
                                 Members
                             </div>
-                            <div className="border-2 border-black bg-purple-500 py-1 px-2 text-white cursor-pointer" onClick={() => { setToShow(true); }}>
+                            <div className="text-sm text-white px-4 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-bold uppercase border-black cursor-pointer mt-2" onClick={() => { setToShow(true); }}>
                                 Doctors
                             </div>
                         </div>
 
                         {/* table */}
                         {toShow ? <div class="flex flex-col">
-                            <div className="">All doctors</div>
+                            <div class="text-center text-xl mb-2 mt-2">
+                                <span class="font-bold"> List of All Doctors</span>
+                            </div>
                             <div class="overflow-x">
                                 <div class="py-2 inline-block min-w-full">
                                     <div class="overflow-hidden">
@@ -159,7 +161,9 @@ const Admin = () => {
                             </div>
                         </div> :
                             <div class="flex flex-col">
-                                <div className="">All Members</div>
+                                <div class="text-center text-xl mb-2 mt-2">
+                                <span class="font-bold"> List of All Members</span>
+                            </div>
                                 <div class="overflow-x">
                                     <div class="py-2 inline-block min-w-full">
                                         <div class="overflow-hidden">

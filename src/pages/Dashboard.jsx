@@ -184,7 +184,7 @@ const Dashboard = () => {
     }
 
 
-    
+
     // // console.log(currUser.user)
     const handleOnChange = (e) => {
         // // console.log("clicked handleOnChange");
@@ -265,7 +265,7 @@ const Dashboard = () => {
                         role: ""
                     })
                 } else {
-                    setError("Created Member" )
+                    setError("Created Member")
                 }
             });
         // Here the auth token returnd by the seevr wil no use coz 
@@ -358,8 +358,8 @@ const Dashboard = () => {
                         experience: newDoc.experience,
                         license: newDoc.license,
                         domain: newDoc.domain,
-                        address:newDoc.address,
-                        role:newDoc.role
+                        address: newDoc.address,
+                        role: newDoc.role
                     })
                 } else {
                     setError("Doc Created")
@@ -405,24 +405,24 @@ const Dashboard = () => {
     show = false -> show all docs
     show = true -> show my docs
     */
-
+    console.log(currUser)
     return (
         <>
             <Sidebar />
             <div className="flex flex-col w-full">
 
-                <section className="header_dashboard bg-green-600 h-12 w-full px-2 flex">
+                <section className="header_dashboard bg-[#4FBAE7] h-12 w-full px-2 flex border-b border-b-black">
                     <div className="flex flex-row items-center h-full justify-between w-full font-sans text-xl text-black ">
-                        <div className="username">
-                            {currUser && <p className='text-xs '>Hello <span className=' hover:font-bold text-base text-black italic '>{currUser.user.firstname}</span></p>}
+                        <div className="username" class="mb-1">
+                            {currUser && <p className='uppercase text-sm font-bold '>User : <span className=' font-bold text-sm text-[#00171F] hover:underline  uppercase'>{currUser.user.firstname}</span></p>}
                         </div>
                         <div className="userrole">
-                            {currUser && <p className='text-xs'>Role <span className='font-bold text-base text-grey-700 italic text-red-900'>{role_mapping(currUser.user.role)}</span></p>}
+                            {currUser && <p className='uppercase text-sm font-bold '>Role : <span className='font-bold text-sm text-[#00171F] hover:underline  uppercase'>{role_mapping(currUser.user.role)}</span></p>}
                         </div>
-                        {currentUserRole == 3 || currentUserRole == 2 ?
-                            <div>
+                        {(currentUserRole == 3 || currentUserRole == 2) &&
+                            <div class="mb-1">
                                 <div className="actionbutton">
-                                    <a className='text-sm text-white px-7 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer'
+                                    <a className='text-sm text-white px-7 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-bold uppercase border-black cursor-pointer '
                                         onClick={() => {
                                             if (showForm) {
                                                 setShowForm(false)
@@ -434,15 +434,11 @@ const Dashboard = () => {
                                     >create</a>
                                 </div>
                             </div>
-                            :
-                            <div>
-
-                            </div>
                         }
-                        {currentUserRole == 0 ?
+                        {currentUserRole == 0 &&
                             <div>
                                 <div className="actionbutton">
-                                    <a className='text-sm text-white px-7 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer'
+                                    <a className='text-sm text-white px-7 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-bold uppercase border-black cursor-pointer'
                                         onClick={() => {
                                             if (createNewDoctor) {
                                                 setCreateNewDoctor(false)
@@ -454,10 +450,15 @@ const Dashboard = () => {
                                     >create</a>
                                 </div>
                             </div>
-                            :
+                        }
+                        {currentUserRole == 1 &&
                             <div>
-
+                                <div className="actionbutton">
+                                    <a className='text-sm text-white px-7 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-bold uppercase border-black cursor-pointer'
+                                    >create</a>
+                                </div>
                             </div>
+
                         }
 
                     </div>
@@ -520,32 +521,33 @@ const Dashboard = () => {
                 {
                     (currentUserRole == 3 || currentUserRole == 2) && showForm &&
 
-
-                    <div class="max-w-md mx-auto mt-6">
-                        <div class="bg-[#4fbae7] shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                            <h2 class="text-2xl font-bold mb-4">Member Registration</h2>
-                            <h5 className='text-red-600'>{error}</h5>
-                            <div class="mb-4">
-                                <label class="block font-bold mb-2" for="firstname">
-                                    First Name
-                                </label>
-                                <input onChange={handleOnChange}
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="firstname" name='firstname' value={newMember.firstname} type="text" placeholder="First Name" />
-                            </div>
-                            <div class="mb-4">
-                                <label class="block font-bold mb-2" for="lastname">
-                                    Last Name
-                                </label>
-                                <input name="lastname" onChange={handleOnChange}
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="lastname" type="text" value={newMember.lastname} placeholder="Last Name" />
-                            </div>
-                            <div class="mb-4">
-                                <label class="block font-bold mb-2" for="position">
-                                    Position
-                                </label>
-                                {/* <select
+                    <div class="w-100 bg-[#4fbae7]">
+                        <div class="max-w-md mx-auto mt-6 w-full">
+                            <div class="bg-[#4fbae7] shadow-lg rounded px-14 pt-10 pb-8 mb-2 ">
+                                <h2 class="text-2xl font-bold mb-4 text-white text-center -mt-4">Member Registration</h2>
+                                <div class="bg-white shadow-md rounded px-10 pt-6 pb-8 mb-4">
+                                    <h5 className='text-red-600'>{error}</h5>
+                                    <div class="mb-4">
+                                        <label class="block font-bold mb-2" for="firstname">
+                                            First Name
+                                        </label>
+                                        <input onChange={handleOnChange}
+                                            class="shadow appearance-none border border-slate-500 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="firstname" name='firstname' value={newMember.firstname} type="text" placeholder="First Name" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block font-bold mb-2" for="lastname">
+                                            Last Name
+                                        </label>
+                                        <input name="lastname" onChange={handleOnChange}
+                                            class="shadow appearance-none border border-slate-500 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="lastname" type="text" value={newMember.lastname} placeholder="Last Name" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block font-bold mb-2" for="position">
+                                            Position
+                                        </label>
+                                        {/* <select
                                     class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                                     id="position">
                                     <option>Select a Specialty</option>
@@ -553,47 +555,51 @@ const Dashboard = () => {
                                     <option>Manager</option>
                                     <option>Tech</option>
                                 </select> */}
-                                {currentUserRole && currentUserRole == 3 ? <div>
-                                    <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
-                                        <option value="1">Tech</option>
-                                        <option value="2" defaultValue>Manager</option>
-                                    </select>
-                                </div> : <div>
-                                    <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
-                                        <option value="0">Choose Role</option>
-                                        <option value="0" >Mr</option>
-                                    </select>
-                                </div>
-                                }
-                            </div>
-                            <div class="mb-4">
-                                <label class="block font-bold mb-2" for="email">
-                                    Email ID
-                                </label>
-                                <input name='email' onChange={handleOnChange}
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="email" value={newMember.email
-                                    } type="email" placeholder="Email ID" />
-                            </div>
-                            <div class="mb-4">
-                                <label class="block font-bold mb-2" for="password">
-                                    Password
-                                </label>
-                                <input name='password' onChange={handleOnChange}
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="password" value={newMember.password} type="text" placeholder="Password" />
-                            </div>
-                            {/* <button type="submit"
+                                        {currentUserRole && currentUserRole == 3 ? <div>
+                                            <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
+                                                <option value="">Select Member Role</option>
+                                                <option value="1">Tech</option>
+                                                <option value="2" defaultValue>Manager</option>
+                                            </select>
+                                        </div> : <div>
+                                            <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
+                                                <option value="0">Choose Role</option>
+                                                <option value="0" >Mr</option>
+                                            </select>
+                                        </div>
+                                        }
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block font-bold mb-2" for="email">
+                                            Email ID
+                                        </label>
+                                        <input name='email' onChange={handleOnChange}
+                                            class="shadow appearance-none border border-slate-500 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="email" value={newMember.email
+                                            } type="email" placeholder="Email ID" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block font-bold mb-2" for="password">
+                                            Password
+                                        </label>
+                                        <input name='password' onChange={handleOnChange}
+                                            class="shadow appearance-none border border-slate-500 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="password" value={newMember.password} type="text" placeholder="Password" />
+                                    </div>
+                                    {/* <button type="submit"
                                 class="text-white bg-blue-900 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
                                 Member</button> */}
-                            {currentUserRole == 3 ? <a onClick={createnewMemeber} className="cursor-pointer w-1/3 align-baseline content-center bg-purple-800 px-2 py-3 text-center text-white">
-                                Create Member</a> :
-                                <a onClick={createnewMr} className="cursor-pointer w-1/3 align-baseline content-center bg-purple-800 px-2 py-3 text-center text-white">
-                                    Create Mr</a>
-                            }
+                                    <div class="px-9 mt-6 -mb-3">
+                                        {currentUserRole == 3 ? <a onClick={createnewMemeber} className="text-md text-white px-7 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-[] font-bold capitalize border-black cursor-pointer">
+                                            Create Member</a> :
+                                            <a onClick={createnewMr} className="text-md text-white px-7 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-[] font-bold capitalize border-black cursor-pointer">
+                                                Create MR</a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 }
 
                 {/* To create new doctor */}
@@ -644,120 +650,124 @@ const Dashboard = () => {
                 </div>} */}
 
                 {currentUserRole == 0 && createNewDoctor &&
-                    <div class="flex justify-center bg-gray-100">
-                        <div class="w-50 p-6 bg-[#4fbae7] rounded-md shadow-lg my-4">
-                            <h2 class="text-2xl font-bold mb-4 text-center text-white font-serif">Doctor Registration</h2>
-                            <div class="flex justify-center">
-                                <div class="max-w-screen bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 pr-10 pl-10">
-                                    <h2 class="text-xl font-bold mb-4">Contact Details</h2>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 font-bold mb-2" for="firstname">
-                                            First Name
-                                        </label>
-                                        <input
-                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="firstname" type="text" name="firstname" onChange={handleOnChangenewDoc} placeholder="First Name" value={newDoc.firstname} />
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 font-bold mb-2" for="middlename">
-                                            Middle Name
-                                        </label>
-                                        <input
-                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="middlename" type="text" name="middlename" onChange={handleOnChangenewDoc} value={newDoc.middlename} placeholder="Middle Name" />
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 font-bold mb-2" for="lastname">
-                                            Last Name
-                                        </label>
-                                        <input
-                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="lastname" type="text" name="lastname" onChange={handleOnChangenewDoc} value={newDoc.lastname} placeholder="Last Name" />
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 font-bold mb-2" for="email">
-                                            Email
-                                        </label>
-                                        <input
-                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="email" type="email" name="email" onChange={handleOnChangenewDoc} value={newDoc.email} placeholder="Email" />
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 font-bold mb-2" for="phoneno">
-                                            Phone Number
-                                        </label>
-                                        <input
-                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="phoneno" name="phone" onChange={handleOnChangenewDoc} value={newDoc.phone} type="number" placeholder="Phone Number" />
-                                    </div>
-                                    {/* <div class="mb-4">
+                    <div class="w-full bg-[#4fbae7]">
+                        <div class="flex justify-center bg-gray-100">
+                            <div class="w-50 p-6 bg-[#4fbae7] rounded-md shadow-lg my-4">
+                                <h2 class="text-2xl font-bold mb-4 text-center text-white font-serif">Doctor Registration</h2>
+                                <div class="flex justify-center">
+                                    <div class="max-w-screen bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 pr-10 pl-10">
+                                        <h2 class="text-xl font-bold mb-4">Contact Details</h2>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 font-bold mb-2" for="firstname">
+                                                First Name
+                                            </label>
+                                            <input
+                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-slate-500"
+                                                id="firstname" type="text" name="firstname" onChange={handleOnChangenewDoc} placeholder="First Name" value={newDoc.firstname} />
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 font-bold mb-2" for="middlename">
+                                                Middle Name
+                                            </label>
+                                            <input
+                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-slate-500"
+                                                id="middlename" type="text" name="middlename" onChange={handleOnChangenewDoc} value={newDoc.middlename} placeholder="Middle Name" />
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 font-bold mb-2" for="lastname">
+                                                Last Name
+                                            </label>
+                                            <input
+                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-slate-500"
+                                                id="lastname" type="text" name="lastname" onChange={handleOnChangenewDoc} value={newDoc.lastname} placeholder="Last Name" />
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 font-bold mb-2" for="email">
+                                                Email
+                                            </label>
+                                            <input
+                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-slate-500"
+                                                id="email" type="email" name="email" onChange={handleOnChangenewDoc} value={newDoc.email} placeholder="Email" />
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 font-bold mb-2" for="phoneno">
+                                                Phone Number
+                                            </label>
+                                            <input
+                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-slate-500"
+                                                id="phoneno" name="phone" onChange={handleOnChangenewDoc} value={newDoc.phone} type="number" placeholder="Phone Number" />
+                                        </div>
+                                        {/* <div class="mb-4">
                                         <label class="block text-gray-700 font-bold mb-2" for="profilephoto">Upload Profile
                                             Picture</label>
                                         <input
                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                             id="profilephoto" type="file" />
                                     </div> */}
-                                </div>
-                                <div class="max-w-screen mx-4 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                                    <h2 class="text-xl font-bold mb-4 ">Career Details </h2>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 font-bold mb-2" for="qualification">
-                                            Qualification
-                                        </label>
-                                        <input
-                                            class="shadow appearance-none border rounded py-2 pr-32 pl-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="qualification" name="qualification" onChange={handleOnChangenewDoc} value={newDoc.qualification} type="text" placeholder="Qualificaiton" />
                                     </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 font-bold mb-2" for="specialty">
-                                            Specialty
-                                        </label>
-                                        <select value={newMember.specialty} name="specialty" onChange={handleOnChangenewDoc}
-                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="specialty">
-                                            <option value="" >Select a Specialty</option>
-                                            <option value="cardiology" >Cardiology</option>
-                                            <option value="dermatology" >Dermatology</option>
-                                            <option value="endocrinology" >Endocrinology</option>
-                                            <option value="gastroenterology" >Gastroenterology</option>
-                                            <option value="hematology" >Hematology</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 font-bold mb-2" for="experience">
-                                            Experience
-                                        </label>
-                                        <input
-                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="experience" name="experience" onChange={handleOnChangenewDoc} value={newDoc.experience} type="number" placeholder="Years of Experience" />
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 font-bold mb-2" for="license-number">
-                                            License Number
-                                        </label>
-                                        <input
-                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="license-number" name="license" onChange={handleOnChangenewDoc} value={newDoc.license} type="text" placeholder="License Number" />
-                                    </div>
+                                    <div class="max-w-screen mx-4 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                                        <h2 class="text-xl font-bold mb-4 ">Career Details </h2>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 font-bold mb-2" for="qualification">
+                                                Qualification
+                                            </label>
+                                            <input
+                                                class="shadow appearance-none border rounded py-2 pr-32 pl-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-slate-500"
+                                                id="qualification" name="qualification" onChange={handleOnChangenewDoc} value={newDoc.qualification} type="text" placeholder="Qualificaiton" />
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 font-bold mb-2" for="specialty">
+                                                Specialty
+                                            </label>
+                                            <select value={newMember.specialty} name="specialty" onChange={handleOnChangenewDoc}
+                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-slate-500"
+                                                id="specialty">
+                                                <option value="" >Select a Specialty</option>
+                                                <option value="cardiology" >Cardiology</option>
+                                                <option value="dermatology" >Dermatology</option>
+                                                <option value="endocrinology" >Endocrinology</option>
+                                                <option value="gastroenterology" >Gastroenterology</option>
+                                                <option value="hematology" >Hematology</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 font-bold mb-2" for="experience">
+                                                Experience
+                                            </label>
+                                            <input
+                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-slate-500"
+                                                id="experience" name="experience" onChange={handleOnChangenewDoc} value={newDoc.experience} type="number" placeholder="Years of Experience" />
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 font-bold mb-2" for="license-number">
+                                                License Number
+                                            </label>
+                                            <input
+                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-slate-500"
+                                                id="license-number" name="license" onChange={handleOnChangenewDoc} value={newDoc.license} type="text" placeholder="License Number" />
+                                        </div>
 
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 font-bold mb-2" for="address">
-                                            Address
-                                        </label>
-                                        <textarea
-                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="address" name="address" onChange={handleOnChangenewDoc} value={newDoc.address} placeholder="Address"></textarea>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 font-bold mb-2" for="address">
+                                                Address
+                                            </label>
+                                            <textarea
+                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-slate-500"
+                                                id="address" name="address" onChange={handleOnChangenewDoc} value={newDoc.address} placeholder="Address"></textarea>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 font-bold mb-2" for="license-number">
+                                                Preffered Domain
+                                            </label>
+                                            <input
+                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-slate-500"
+                                                id="license-number" type="text" placeholder="Preferred Domain" name="domain" onChange={handleOnChangenewDoc} value={newDoc.domain} />
+                                        </div>
+                                        <div class="mx-24">
+                                            <button onClick={createDoctor} type="submit"
+                                                class="text-md text-white px-7 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-[] font-bold capitalize border-black cursor-pointer">Submit</button>
+                                        </div>
                                     </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 font-bold mb-2" for="license-number">
-                                            Preffered Domain
-                                        </label>
-                                        <input
-                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="license-number" type="text" placeholder="Preferred Domain" name="domain" onChange={handleOnChangenewDoc} value={newDoc.domain} />
-                                    </div>
-                                    <button onClick={createDoctor} type="submit"
-                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2 px-10 hover:ease-in hover:font-bold">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -817,13 +827,13 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                <section className='flex flex-row w-full justify-around bg-red-500'>
-                    <p className={`cursor-pointer bg-yellow-200 `} 
-                    style={{
-                        display: currentUserRole > 0 ? "none" : "block",
-                    }} 
-                    onClick={() => { setShow(true) }} >Your Doctors</p>
-                    <p className='cursor-pointer bg-yellow-200' onClick={() => { setShow(false) }} >All Doctos</p>
+                <section className='flex flex-row w-full justify-around bg-slate-200'>
+                    <p className={`text-sm text-white px-4 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-bold uppercase border-black cursor-pointer mb-3`}
+                        style={{
+                            display: currentUserRole > 0 ? "none" : "block",
+                        }}
+                        onClick={() => { setShow(true) }} >Your Doctors</p>
+                    <p className='text-sm text-white px-4 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-bold uppercase border-black cursor-pointer mb-3' onClick={() => { setShow(false) }} >All Doctors</p>
                 </section>
                 {/* table */}
                 <div class="flex flex-col">
@@ -832,7 +842,9 @@ const Dashboard = () => {
                             <div class="overflow-hidden">
                                 {show == true &&
                                     <div>
-                                        <p>All Your Rejected doctors</p>
+                                        <div class="text-center text-xl mb-2">
+                                            <span class="font-bold"> List of All Your Rejected Doctors</span>
+                                        </div>
                                         <table class="min-w-full">
                                             <thead class="bg-white border-b">
                                                 <tr>
@@ -864,14 +876,16 @@ const Dashboard = () => {
                                             </tbody>
                                         </table>
                                         <div className="page_control flex py-2 w-full bg-[#4fbae7] flex-row justify-around">
-                                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{cursor:page2==1?"text":"pointer"}} disabled={page2 === 1} onClick={handlePrevious2}>Previous</button>
-                                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{cursor:page2==pageCount2?"pointer":"text"}} disabled={page2 === pageCount2} onClick={handleNext2}>Next</button>
+                                            <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{ cursor: page2 == 1 ? "text" : "pointer" }} disabled={page2 === 1} onClick={handlePrevious2}>Previous</button>
+                                            <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{ cursor: page2 == pageCount2 ? "pointer" : "text" }} disabled={page2 === pageCount2} onClick={handleNext2}>Next</button>
                                         </div>
                                     </div>
                                 }
                                 {show == false &&
                                     <div>
-                                        <p>All rejected doctors</p>
+                                        <div class="text-center text-xl mb-2">
+                                            <span class="font-bold "> List of All Rejected Doctors</span>
+                                        </div>
                                         <table class="min-w-full">
                                             <thead class="bg-white border-b">
                                                 <tr>
@@ -899,9 +913,9 @@ const Dashboard = () => {
                                                 <Dashbordtable drs={drs} />
                                             </tbody>
                                         </table>
-                                        <div className="page_control flex py-2 w-full bg-[#4fbae7] flex-row justify-around">
-                                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer' disabled={page1 == 1} onClick={handlePrevious1}>Previous</button>
-                                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer' disabled={page1 == pageCount1} onClick={handleNext1}>Next</button>
+                                        <div className="page_control flex py-2 w-full bg-[#4FBAE7] flex-row justify-around rounded-lg">
+                                            <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer' disabled={page1 == 1} onClick={handlePrevious1}>Previous</button>
+                                            <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer' disabled={page1 == pageCount1} onClick={handleNext1}>Next</button>
                                         </div>
                                     </div>
                                 }

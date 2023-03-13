@@ -113,20 +113,22 @@ const Requests = () => {
 
                 <div className='flex flex-col w-full'>
                     <div className='w-full'>
-                        <h2 className='text-black text-center bg-slate-300 capitalize font-serif h-10 items-center justify-center flex  '>
+                        <h2 className='text-black text-center text-xl bg-slate-200 capitalize font-serif h-10 items-center justify-center flex  '>
                             All the requests
                         </h2>
-                        <section className='flex flex-row w-full justify-around bg-red-500'>
-                            <p className='cursor-pointer bg-yellow-200' onClick={()=>{setShow(false)}} >All Requests</p>
+                        <section className='flex flex-row w-full justify-around mt-3'>
+                            <p className='text-sm text-white px-4 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-bold uppercase border-black cursor-pointer mb-3' onClick={()=>{setShow(false)}} >All Requests</p>
                             <p
                             style={{
                                 display: currentUserRole > 0 ? "none" : "block",
                             }} 
-                            className='cursor-pointer bg-yellow-200' onClick={()=>{setShow(true)}} >Your Requests</p>
+                            className='text-sm text-white px-4 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-bold uppercase border-black cursor-pointer mb-3' onClick={()=>{setShow(true)}} >Your Requests</p>
                         </section>
                         {show ==false &&
                         <div>
-                            <p>All Requests</p>
+                            <div class="text-center text-xl ">
+                                        <span class="font-bold "> List Of All Requests</span>
+                                        </div>
                             <table className='mx-5 mt-5 min-w-full'>
                             <thead class="bg-white border-2">
                                 <tr>
@@ -176,7 +178,9 @@ const Requests = () => {
                         }
                         {show==true &&
                         <div>
-                            <p>Your requests Requests</p>
+                             <div class="text-center text-xl ">
+                                        <span class="font-bold ">List Of Your Requests</span>
+                             </div>
                             <table className='mx-5 mt-5 min-w-full' >
                             <thead class="bg-white border-2">
                                 <tr>
@@ -228,7 +232,7 @@ const Requests = () => {
                 </div>
                 {show==false &&
 
-                    <div className="page_control flex py-2 w-full bg-[#4fbae7] flex-row justify-around">
+                    <div className="page_control flex py-2 w-full bg-[#4fbae7] flex-row justify-around ml-5 rounded-xl">
                     <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{cursor:page==1?"text":"pointer"}} disabled={page === 1} onClick={handlePrevious}>Previous</button>
                     <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{cursor:page==pageCount?"pointer":"text"}} disabled={page === pageCount} onClick={handleNext}>Next</button>
                     {/* <b>pagge: {page}</b>

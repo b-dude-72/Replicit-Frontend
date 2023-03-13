@@ -70,8 +70,8 @@ const Websites = () => {
             {/* only allowd to manager tech and admin not to MR */}
             <div className='flex flex-col w-full'>
                 <div className='w-full'>
-                    <h2 className='text-black text-center bg-slate-300 capitalize font-serif h-10 items-center justify-center flex '>
-                        All the requests for Tech here
+                <h2 className='text-black text-center text-xl bg-slate-200 capitalize font-serif h-10 items-center justify-center flex '>
+                        All the request for Tech are here
                     </h2>
                     {currUser && currentUserRole === 1  ||  currentUserRole == 3 ?
                         <table className='mx-5 mt-5'>
