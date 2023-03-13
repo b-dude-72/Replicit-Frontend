@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AlldrsForManager from '../components/AlldrsForManager';
 import AllMrsOfManager from '../components/AllMrsOfManager';
 
+
 const Manager = () => {
 
     let navigate = useNavigate();
@@ -13,6 +14,8 @@ const Manager = () => {
     const [currUser, setCurrUser] = useState();
     let currentUserRole;
 
+    const [page, setPage] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
 
     const getCurrentUserData = () => {
 
@@ -55,9 +58,12 @@ const Manager = () => {
                 'auth-token': localAuth
             },
         };
-        fetch(`${process.env.REACT_APP_URL}/api/auth/getmanagermr`, requestOptions)
+        fetch(`${process.env.REACT_APP_URL}/api/auth/getmanagermr?page:${page}`, requestOptions)
             .then(response => response.json())
-            .then(data => Setmr(data.items));
+            .then(data => {
+                Setmr(data.items)
+                setPageCount(data.pagination.pageCount)
+            });
     }
 
 
@@ -68,9 +74,26 @@ const Manager = () => {
         getAllDocs();
         getCurrentUserData();
         getAllManagers();
-    }, [])
+    }, [page])
 
+    function handlePrevious() {
+        setPage((p) => {
+            if (p === 1) {
+                return 1;
+            }
+            return p - 1;
+        })
+    }
 
+    function handleNext() {
+        setPage((p) => {
+            // if(p===pageCount){
+            if (p === Math.ceil(pageCount)) {
+                return p;
+            }
+            return p + 1;
+        })
+    }
 
     // // console.log(drs)
     // // console.log(currUser)
@@ -189,6 +212,12 @@ const Manager = () => {
                                 <AllMrsOfManager mrs={mr} />
                             </tbody>
                         </table>
+                        Count is {page}
+                        PageCount is {pageCount}
+                        <div className="page_control flex py-2 w-full bg-[#4fbae7] flex-row justify-around">
+                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' onClick={handlePrevious}>Previous</button>
+                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' onClick={handleNext}>Next</button>
+                        </div>
                         </div> 
                     }
                 </div>

@@ -18,6 +18,14 @@ const Dashboard = () => {
     show = false -> show all docs
    */
 
+    //all rejected doctors pagination
+    const [page1, setPage1] = useState(1);
+    const [pageCount1, setPageCount1] = useState(0);
+
+    //all your doctors rejected pagination
+    const [page2, setPage2] = useState(1);
+    const [pageCount2, setPageCount2] = useState(0);
+
     const [newMember, setNewMember] = useState({
         firstname: "",
         lastname: "",
@@ -66,7 +74,7 @@ const Dashboard = () => {
                 'auth-token': localAuth
             },
         };
-        fetch(`${process.env.REACT_APP_URL}/api/auth/notapproveddrs`, requestOptions)
+        fetch(`${process.env.REACT_APP_URL}/api/auth/notapproveddrs?page=${page1}`, requestOptions)
             .then(response => response.json())
             .then(data => SetDrs(data.drs));
     }
@@ -81,11 +89,10 @@ const Dashboard = () => {
                 'auth-token': localAuth
             },
         };
-        fetch(`${process.env.REACT_APP_URL}/api/auth/notapproveddrsmr`, requestOptions)
+        fetch(`${process.env.REACT_APP_URL}/api/auth/notapproveddrsmr?page=${page2}`, requestOptions)
             .then(response => response.json())
             .then(data => setMyDrs(data.drs));
     }
-
 
     useEffect(() => {
         if (!localAuth) {
@@ -94,9 +101,54 @@ const Dashboard = () => {
         getCurrentUserData();
         getAllDocs();
         getAllDocsMr();
-    }, [])
+    }, [page1])
 
+    useEffect(() => {
+        if (!localAuth) {
+            navigate('/login')
+        }
+        getCurrentUserData();
+        getAllDocs();
+        getAllDocsMr();
+    }, [page2])
 
+    function handlePrevious1() {
+        setPage1((p1) => {
+            if (p1 === 1) {
+                return 1;
+            }
+            return p1 - 1;
+        })
+    }
+
+    function handleNext1() {
+        setPage1((p1) => {
+            // if(p===pageCount){
+            if (p1 === Math.ceil(pageCount1)) {
+                return p1;
+            }
+            return p1 + 1;
+        })
+    }
+
+    function handlePrevious2() {
+        setPage2((p) => {
+            if (p === 1) {
+                return 1;
+            }
+            return p - 1;
+        })
+    }
+
+    function handleNext2() {
+        setPage2((p) => {
+            // if(p===pageCount){
+            if (p === Math.ceil(pageCount2)) {
+                return p;
+            }
+            return p + 1;
+        })
+    }
 
     // // console.log(currUser)
     // // console.log(typeof(currUser))
@@ -132,8 +184,7 @@ const Dashboard = () => {
     }
 
 
-
-
+    
     // // console.log(currUser.user)
     const handleOnChange = (e) => {
         // // console.log("clicked handleOnChange");
@@ -812,6 +863,10 @@ const Dashboard = () => {
                                                 <Dashbordtable drs={mydrs} />
                                             </tbody>
                                         </table>
+                                        <div className="page_control flex py-2 w-full bg-[#4fbae7] flex-row justify-around">
+                                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{cursor:page2==1?"text":"pointer"}} disabled={page2 === 1} onClick={handlePrevious2}>Previous</button>
+                                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{cursor:page2==pageCount2?"pointer":"text"}} disabled={page2 === pageCount2} onClick={handleNext2}>Next</button>
+                                        </div>
                                     </div>
                                 }
                                 {show == false &&
@@ -844,6 +899,10 @@ const Dashboard = () => {
                                                 <Dashbordtable drs={drs} />
                                             </tbody>
                                         </table>
+                                        <div className="page_control flex py-2 w-full bg-[#4fbae7] flex-row justify-around">
+                                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer' disabled={page1 == 1} onClick={handlePrevious1}>Previous</button>
+                                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer' disabled={page1 == pageCount1} onClick={handleNext1}>Next</button>
+                                        </div>
                                     </div>
                                 }
                             </div>
