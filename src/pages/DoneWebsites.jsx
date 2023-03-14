@@ -54,6 +54,7 @@ const DoneWebsites = () => {
         if (!localAuth) {
             navigate('/login')
         }
+        document.title="Done Websites - Replicit"
         getAllDocs();
         getCurrentUserData();
     }, [])

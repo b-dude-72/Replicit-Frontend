@@ -18,6 +18,7 @@ const Admin = () => {
         if (!localAuth) {
             navigate('/login')
         }
+        document.title="Admin - Replicit"
         getAllDocs();
         getAllMembers();
         getCurrentUserData();

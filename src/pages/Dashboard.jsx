@@ -98,6 +98,7 @@ const Dashboard = () => {
         if (!localAuth) {
             navigate('/login')
         }
+        document.title="Dashboard - Replicit"
         getCurrentUserData();
         getAllDocs();
         getAllDocsMr();

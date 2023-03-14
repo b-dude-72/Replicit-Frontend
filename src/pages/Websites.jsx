@@ -51,6 +51,7 @@ const Websites = () => {
         if (!localAuth) {
             navigate('/login')
         }
+        document.title="Websites - Replicit"
         getAllDocs();
         getCurrentUserData();
     }, [])

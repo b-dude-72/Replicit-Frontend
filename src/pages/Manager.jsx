@@ -78,6 +78,7 @@ const Manager = () => {
         if (!localAuth) {
             navigate('/login')
         }
+        document.title="Manager - Replicit"
         getAllDocs();
         getCurrentUserData();
     }, [])

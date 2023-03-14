@@ -74,6 +74,7 @@ const Requests = () => {
         if (!localAuth) {
             navigate('/login')
         }
+        document.title="Requests- Replicit"
         getAllDocs()
         getMyDocs();
         getCurrentUserData();

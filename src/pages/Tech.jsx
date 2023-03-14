@@ -52,6 +52,7 @@ const Tech = () => {
         if (!localAuth) {
             navigate('/login')
         }
+        document.title="Tech - Replicit"
         getAllDocs();
         getCurrentUserData();
 
