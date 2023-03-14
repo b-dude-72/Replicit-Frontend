@@ -15,6 +15,8 @@ const DoneWebsites = () => {
     const [currUser, setCurrUser] = useState();
     let currentUserRole;
 
+    const [page1, setPage1] = useState(1);
+    const [pageCount1, setPageCount1] = useState(0);
 
     const getCurrentUserData = () => {
 
@@ -43,10 +45,14 @@ const DoneWebsites = () => {
                 'auth-token': localAuth
             },
         };
-        fetch(`${process.env.REACT_APP_URL}/api/auth/donewebsites`, requestOptions)
+        fetch(`${process.env.REACT_APP_URL}/api/auth/donewebsites?page=${page1}`, requestOptions)
             .then(response => response.json())
             // .then(data => // console.log(data.doctorsDone));
-            .then(data => SetDrs(data.doctorsDone));
+            .then(data => {
+                SetDrs(data.doctorsDone);
+                setPageCount1(data.pagination.pageCount)
+            }
+            );
 
     }
 
@@ -54,10 +60,35 @@ const DoneWebsites = () => {
         if (!localAuth) {
             navigate('/login')
         }
-        document.title="Done Websites - Replicit"
-        getAllDocs();
+        document.title = "Done Websites - Replicit"
         getCurrentUserData();
+
     }, [])
+
+    useEffect(() => {
+        getAllDocs();
+
+    }, [page1])
+
+
+    function handleNext1() {
+        setPage1((p) => {
+            // if(p===pageCount){
+            if (p === Math.ceil(pageCount1)) {
+                return p;
+            }
+            return p + 1;
+        })
+    }
+
+    function handlePrevious1() {
+        setPage1((p) => {
+            if (p === 1) {
+                return 1;
+            }
+            return p - 1;
+        })
+    }
 
 
     return (
@@ -70,10 +101,11 @@ const DoneWebsites = () => {
                         All the requests
                     </h2>
                     {currUser &&
-                        <table className='mx-5 mt-5'>
-                            <thead class="bg-white border-2">
-                                <tr>
-                                    {/* <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        <div>
+                            <table className='mx-5 mt-5'>
+                                <thead class="bg-white border-2">
+                                    <tr>
+                                        {/* <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Name
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -81,8 +113,8 @@ const DoneWebsites = () => {
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Status */}
-                                    {/* <span>approved by manager</span> */}
-                                    {/* </th>
+                                        {/* <span>approved by manager</span> */}
+                                        {/* </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Mr ID
                                     </th>
@@ -92,51 +124,59 @@ const DoneWebsites = () => {
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Website
                                     </th> */}
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        First Name
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Middle Name
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Last Name
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Phone
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Email
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Qualification
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Specialty
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Expericence
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Preferred Domain
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Address
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        License
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Status
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        webiste
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <AlldrsDoneWebsite drs={drs} />
-                            </tbody>
-                        </table>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            First Name
+                                        </th>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Middle Name
+                                        </th>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Last Name
+                                        </th>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Phone
+                                        </th>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Email
+                                        </th>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Qualification
+                                        </th>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Specialty
+                                        </th>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Expericence
+                                        </th>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Preferred Domain
+                                        </th>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Address
+                                        </th>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            License
+                                        </th>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Status
+                                        </th>
+                                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            webiste
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <AlldrsDoneWebsite drs={drs} />
+                                </tbody>
+                            </table>
+
+                            <div className="page_control flex py-2 w-full bg-[#4FBAE7] flex-row justify-around rounded-lg">
+                                {/* page1: {page1} */}
+                                {/* pagecount: {pageCount1} */}
+                                <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer' disabled={page1 == 1} onClick={handlePrevious1}>Previous</button>
+                                <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer' disabled={page1 == pageCount1} onClick={handleNext1}>Next</button>
+                            </div>
+                        </div>
                     }
                 </div>
             </div>
