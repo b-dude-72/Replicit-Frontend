@@ -134,7 +134,7 @@ const Websites = () => {
                                 <AlldrsForWebsites drs={drs} />
                             </tbody>
                         </table>
-                        <div className="page_control flex py-2 w-full bg-[#4FBAE7] flex-row justify-around rounded-lg">
+                        <div className="page_control flex py-2 w-[800px] ml-20 bg-[#4FBAE7] flex-row justify-around rounded-lg">
                                 {/* page1: {page1} */}
                                 {/* pagecount: {pageCount1} */}
                                 <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black cursor-pointer' disabled={page1 == 1} onClick={handlePrevious1}>Previous</button>

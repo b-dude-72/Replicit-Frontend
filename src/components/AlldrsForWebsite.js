@@ -44,21 +44,21 @@ const AlldrsForWebsites = ({ drs }) => {
 
     // // console.log(role)
 
-    if(message){
+    if (message) {
         setTimeout(() => {
-                setMessage("")
-            }, 2000);
+            setMessage("")
+        }, 2000);
     }
 
-    
+
 
     return (
         <>
             <>
                 {message && <p>{message}</p>}
                 {
-                    drs.map((drs) => {
-                        const { _id, firstname,lastname,phone, email, status } = drs;
+                    drs && drs.map((drs) => {
+                        const { _id, firstname, lastname, phone, email, status } = drs;
                         const handleOnChange = (e) => {
                             // // console.log("clicked handleOnChange");
                             // // console.log(userData);

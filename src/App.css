@@ -48,3 +48,9 @@ main{
 .icon, .link_text{
   font-size: 20px;
 }
+
+/* table {
+  display: block;
+  overflow-x: scroll;
+  white-space: nowrap;
+} */

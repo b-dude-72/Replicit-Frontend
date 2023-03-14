@@ -74,14 +74,14 @@ const Requests = () => {
         if (!localAuth) {
             navigate('/login')
         }
-        document.title="Requests- Replicit"
+        document.title = "Requests- Replicit"
         getAllDocs()
         getMyDocs();
         getCurrentUserData();
     }, [page])
 
     let currentUserRole;
-    if(currUser){
+    if (currUser) {
         currentUserRole = currUser.user.role;
     }
 
@@ -114,131 +114,130 @@ const Requests = () => {
 
                 <div className='flex flex-col w-full'>
                     <div className='w-full'>
-                        <h2 className='text-black text-center text-xl bg-slate-200 capitalize font-serif h-10 items-center justify-center flex  '>
-                            All the requests
-                        </h2>
                         <section className='flex flex-row w-full justify-around mt-3'>
-                            <p className='text-sm text-white px-4 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-bold uppercase border-black cursor-pointer mb-3' onClick={()=>{setShow(false)}} >All Requests</p>
+                            <p className='text-sm text-white px-4 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-bold uppercase border-black cursor-pointer mb-3' onClick={()=>{setShow(false)}} style={{display:(currentUserRole==1 || currentUserRole==2 || currentUserRole==3)?"none":"block"}} >All Requests</p>
                             <p
                             style={{
                                 display: currentUserRole > 0 ? "none" : "block",
                             }} 
                             className='text-sm text-white px-4 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-bold uppercase border-black cursor-pointer mb-3' onClick={()=>{setShow(true)}} >Your Requests</p>
                         </section>
-                        {show ==false &&
-                        <div>
-                            <div class="text-center text-xl ">
-                                        <span class="font-bold "> List Of All Requests</span>
-                                        </div>
-                            <table className='mx-5 mt-5 min-w-full'>
-                            <thead class="bg-white border-2">
-                                <tr>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        First Name
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Middle Name
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Last Name
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Phone
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Email
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Qualification
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Specialty
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Expericence
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Preferred Domain
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Address
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        License
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Status
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <Alldrs drs={alldrs} />
-                            </tbody>
-                        </table>
-                        </div>
+
+                        {show == false &&
+
+                            <div style={{ overflowX: "scroll", overflowY: "scroll" }} class="h-[37.5em] max-w-[72em]">
+                                <div class="text-center text-xl ">
+                                    <span class="font-bold "> List Of All Requests</span>
+                                </div>
+                                <table className='mt-5 min-w-full'>
+                                    <thead class="bg-white border-2">
+                                        <tr class="">
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                First Name
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left ">
+                                                Middle Name
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left ">
+                                                Last Name
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left ">
+                                                Phone
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Email
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Qualification
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Specialty
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Expericence
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Preferred Domain
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Address
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                License
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Status
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <Alldrs drs={alldrs} />
+                                    </tbody>
+                                </table>
+                            </div>
                         }
-                        {show==true &&
-                        <div>
-                             <div class="text-center text-xl ">
-                                        <span class="font-bold ">List Of Your Requests</span>
-                             </div>
-                            <table className='mx-5 mt-5 min-w-full' >
-                            <thead class="bg-white border-2">
-                                <tr>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        First Name
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Middle Name
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Last Name
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Phone
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Email
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Qualification
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Specialty
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Expericence
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Preferred Domain
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Address
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        License
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Status
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <Alldrs drs={myDrs} />
-                            </tbody>
-                        </table>
-                        </div>
+                        {show == true &&
+                            <div style={{ overflowX: "scroll", overflowY: "scroll" }}>
+                                <div class="text-center text-xl ">
+                                    <span class="font-bold ">List Of Your Requests</span>
+                                </div>
+                                <table className='mx-5 mt-5 min-w-full' >
+                                    <thead class="bg-white border-2">
+                                        <tr class="">
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                First Name
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Middle Name
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Last Name
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Phone
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Email
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Qualification
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Specialty
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Expericence
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Preferred Domain
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Address
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                License
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Status
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <Alldrs drs={myDrs} />
+                                    </tbody>
+                                </table>
+                            </div>
                         }
                     </div>
                 </div>
-                {show==false &&
+                {show == false &&
 
-                    <div className="page_control flex py-2 w-full bg-[#4fbae7] flex-row justify-around ml-5 rounded-xl">
-                    <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{cursor:page==1?"text":"pointer"}} disabled={page === 1} onClick={handlePrevious}>Previous</button>
-                    <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{cursor:page==pageCount?"text":"pointer"}} disabled={page === pageCount} onClick={handleNext}>Next</button>
-                    {/* <b>pagge: {page}</b>
+                    <div className="page_control flex py-2 w-[1000px] bg-[#4fbae7] flex-row justify-around ml-44 rounded-xl ">
+                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{ cursor: page == 1 ? "text" : "pointer" }} disabled={page === 1} onClick={handlePrevious}>Previous</button>
+                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{ cursor: page == pageCount ? "text" : "pointer" }} disabled={page === pageCount} onClick={handleNext}>Next</button>
+                        {/* <b>pagge: {page}</b>
                 <b>page count: {pageCount}</b> */}
-                </div>
+                    </div>
                 }
             </div>
         </>
