@@ -3,6 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import Dashbordtable from '../components/Dashbordtable';
 import Sidebar from '../components/Sidebar';
 
+
+
+function checkpassword(){
+    let password1 = document.getElementById('password').value;
+    let password2 = document.getElementById('cpassword').value;
+
+    let btn1= document.getElementById('createmember')
+    if(password1 != password2){
+        btn1.innerHTML = `<a className="text-md text-white px-7 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-[] font-bold capitalize border-black cursor-pointer">Check Password</a>`
+        btn1.style.opacity = (0.4);
+    }else{
+        btn1.innerText = "Create Member"
+        btn1.style.opacity = (1);
+
+    }
+
+    console.log("password: "  +password1 + " password2 " + password2)
+}
+
 const Dashboard = () => {
     let navigate = useNavigate();
     let localAuth = localStorage.getItem('auth-token')
@@ -12,6 +31,7 @@ const Dashboard = () => {
     const [createNewDoctor, setCreateNewDoctor] = useState(false);
     const [drs, SetDrs] = useState([]);
     const [mydrs, setMyDrs] = useState([]);
+    const [notPassword, setNotPassword] = useState();
     const [showForm, setShowForm] = useState(false)
     /*
     show = true -> show your docs
@@ -31,6 +51,7 @@ const Dashboard = () => {
         lastname: "",
         email: "",
         password: "",
+        cpassword: "",
         role: ""
     })
 
@@ -216,12 +237,15 @@ const Dashboard = () => {
 
         // // console.log(newMember)
 
+
+
         submitToDb(adminID, newMember.firstname, newMember.lastname, newMember.email, newMember.password, newMember.role, currentUserId, endpoint)
         setNewMember({
             firstname: "",
             lastname: "",
             email: "",
             password: "",
+            cpassword:"",
             role: ""
         })
         setTimeout(() => {
@@ -256,13 +280,15 @@ const Dashboard = () => {
             .then((data) => {
                 if (data.error) {
                     // console.log("Error")
-                    console.log(data.error)
-                    setError(data.error)
+                    // console.log(data.error)
+                    // setError(data.error)
+                    setError("Check all the fileds")
                     setNewMember({
                         firstname: newMember.firstname,
                         lastname: newMember.lastname,
                         email: newMember.email,
                         password: newMember.password,
+                        cpassword:"",
                         role: ""
                     })
                 } else {
@@ -292,6 +318,7 @@ const Dashboard = () => {
             lastname: "",
             email: "",
             password: "",
+            cpassword:"",
             role: ""
         })
         setTimeout(() => {
@@ -406,7 +433,10 @@ const Dashboard = () => {
     show = false -> show all docs
     show = true -> show my docs
     */
-    console.log(currUser)
+
+
+
+    // console.log(currUser)
     return (
         <>
             <Sidebar />
@@ -583,17 +613,26 @@ const Dashboard = () => {
                                         <label class="block font-bold mb-2" for="password">
                                             Password
                                         </label>
-                                        <input name='password' onChange={handleOnChange}
+                                        <input  name='password' onChange={handleOnChange}
                                             class="shadow appearance-none border border-slate-500 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="password" value={newMember.password} type="text" placeholder="Password" />
+                                            id="password" value={newMember.password} type="password" placeholder="Password" />
                                     </div>
+                                    <div class="mb-4">
+                                        <label class="block font-bold mb-2" for="password">
+                                            Confirm Password
+                                        </label>
+                                        <input name='cpassword'  onChange={handleOnChange} onKeyUp={checkpassword}
+                                            class="shadow appearance-none border border-slate-500 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" 
+                                            id="cpassword" value={newMember.cpassword} type="password" placeholder="Confirm Password" />
+                                    </div>
+                                    <span className='text-red-500 text-sm font-bold'>{notPassword}</span>
                                     {/* <button type="submit"
                                 class="text-white bg-blue-900 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
                                 Member</button> */}
                                     <div class="px-9 mt-6 -mb-3">
-                                        {currentUserRole == 3 ? <a onClick={createnewMemeber} className="text-md text-white px-7 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-[] font-bold capitalize border-black cursor-pointer">
+                                        {currentUserRole == 3 ? <a onClick={createnewMemeber} id="createmember" className="text-md text-white px-7 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-[] font-bold capitalize border-black cursor-pointer">
                                             Create Member</a> :
-                                            <a onClick={createnewMr} className="text-md text-white px-7 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-[] font-bold capitalize border-black cursor-pointer">
+                                            <a onClick={createnewMr}  id="createmember"  className="text-md text-white px-7 py-2 border-red bg-purple-700 hover:bg-purple-600 border-1 rounded-xl font-[] font-bold capitalize border-black cursor-pointer">
                                                 Create MR</a>
                                         }
                                     </div>
