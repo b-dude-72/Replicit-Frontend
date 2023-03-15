@@ -14,6 +14,9 @@ const Requests = () => {
     show = true -> show my docs
     */
     const [currUser, setCurrUser] = useState();
+        //all your doctors rejected pagination
+        const [page2, setPage2] = useState(1);
+        const [pageCount2, setPageCount2] = useState(0);
     const getCurrentUserData = () => {
 
 
@@ -59,10 +62,11 @@ const Requests = () => {
                 'auth-token': localAuth
             },
         };
-        fetch(`${process.env.REACT_APP_URL}/api/auth/getdrmr`, requestOptions)
+        fetch(`${process.env.REACT_APP_URL}/api/auth/getdrmr?page=${page2}`, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setMyDrs(data.items);
+                setPageCount2(data.pagination.pageCount)
             }
             );
     }
@@ -75,10 +79,18 @@ const Requests = () => {
             navigate('/login')
         }
         document.title = "Requests- Replicit"
-        getAllDocs()
-        getMyDocs();
         getCurrentUserData();
     }, [page])
+    
+    useEffect(()=>{
+        getAllDocs()
+
+    },[page])
+    
+    useEffect(()=>{
+        getMyDocs();
+
+    },[page2])
 
     let currentUserRole;
     if (currUser) {
@@ -103,6 +115,27 @@ const Requests = () => {
             return p + 1;
         })
     }
+
+
+    function handlePrevious2() {
+        setPage2((p) => {
+            if (p === 1) {
+                return 1;
+            }
+            return p - 1;
+        })
+    }
+
+    function handleNext2() {
+        setPage2((p) => {
+            // if(p===pageCount){
+            if (p === Math.ceil(pageCount2)) {
+                return p;
+            }
+            return p + 1;
+        })
+    }
+
 
     // console.log(myDrs)
 
@@ -174,9 +207,16 @@ const Requests = () => {
                                         <Alldrs drs={alldrs} />
                                     </tbody>
                                 </table>
+                                <div className="page_control flex py-2 w-[1000px] bg-[#4fbae7] flex-row justify-around ml-44 rounded-xl ">
+                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{ cursor: page == 1 ? "text" : "pointer" }} disabled={page === 1} onClick={handlePrevious}>Previous</button>
+                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{ cursor: page == pageCount ? "text" : "pointer" }} disabled={page === pageCount} onClick={handleNext}>Next</button>
+                        {/* <b>pagge: {page}</b>
+                <b>page count: {pageCount}</b> */}
+                    </div>
+                                
                             </div>
                         }
-                        {show == true &&
+                        {show == true && 
                             <div style={{ overflowX: "scroll", overflowY: "scroll" }}>
                                 <div class="text-center text-xl ">
                                     <span class="font-bold ">List Of Your Requests</span>
@@ -226,19 +266,16 @@ const Requests = () => {
                                         <Alldrs drs={myDrs} />
                                     </tbody>
                                 </table>
+                                <div className="page_control flex py-2 w-[1000px] bg-[#4fbae7] flex-row justify-around ml-44 rounded-xl ">
+                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{ cursor: page == 1 ? "text" : "pointer" }} disabled={page2 === 1} onClick={handlePrevious2}>Previous</button>
+                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{ cursor: page2 == pageCount2 ? "text" : "pointer" }} disabled={page2 === pageCount2} onClick={handleNext2}>Next</button>
+                        {/* <b>pagge: {page}</b>
+                <b>page count: {pageCount}</b> */}
+                    </div>
                             </div>
                         }
                     </div>
                 </div>
-                {show == false &&
-
-                    <div className="page_control flex py-2 w-[1000px] bg-[#4fbae7] flex-row justify-around ml-44 rounded-xl ">
-                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{ cursor: page == 1 ? "text" : "pointer" }} disabled={page === 1} onClick={handlePrevious}>Previous</button>
-                        <button className='text-sm text-white px-7 hover:bg-blue-700 py-2 border-red bg-blue-800 border-1 rounded-xl font-bold uppercase border-black' style={{ cursor: page == pageCount ? "text" : "pointer" }} disabled={page === pageCount} onClick={handleNext}>Next</button>
-                        {/* <b>pagge: {page}</b>
-                <b>page count: {pageCount}</b> */}
-                    </div>
-                }
             </div>
         </>
     );

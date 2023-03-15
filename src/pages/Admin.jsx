@@ -144,7 +144,15 @@ const Admin = () => {
 
     if (currUser) {
         currentUserRole = currUser.user.role;
-
+        if(currentUserRole == 0){
+            navigate("/")
+        }
+        if(currentUserRole == 1){
+            navigate("/")
+        }
+        if(currentUserRole == 2){
+            navigate("/")
+        }
     }
 
     return (

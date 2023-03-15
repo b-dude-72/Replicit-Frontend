@@ -73,9 +73,13 @@ const Websites = () => {
         currentUserRole = currUser.user.role;
         if(!( currentUserRole != 1|| currentUserRole != 3)){
             navigate("/")
-
+        }
+        if(currentUserRole ===0){
+            navigate("/")
         }
     }
+
+    
 
     function handleNext1() {
         setPage1((p) => {

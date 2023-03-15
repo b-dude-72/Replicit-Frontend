@@ -4,7 +4,7 @@
 const Alldrs = ({ drs }) => {
     return (
         <>
-            {
+            {drs && 
                 drs.map((currdr) => {
                     const { firstname,middlename,lastname,phone,email,qualification, specialty,experience,domain,address,license, status } = currdr;
                     return (
