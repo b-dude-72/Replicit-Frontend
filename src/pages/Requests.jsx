@@ -49,6 +49,7 @@ const Requests = () => {
             .then(response => response.json())
             .then(data => {
                 setAllDrs(data.items);
+                // console.log(data.items)
                 setPageCount(data.pagination.pageCount);
             }
             );
