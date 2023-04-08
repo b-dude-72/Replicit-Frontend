@@ -28,7 +28,6 @@ const DashBoardStats = () => {
 
     useEffect(() => {
         getCurrentUserData()
-        getAllDocs()
     }, [])
 
     // console.log("curr user role:" + currentUserRole)
@@ -43,7 +42,7 @@ const DashBoardStats = () => {
     //  total number of MRs -> mr count
     //  total number of live websites -> done
 
-    const getAllDocs = () => {
+    const getAllNew = () => {
 
         const requestOptions = {
             method: 'GET',
@@ -52,47 +51,70 @@ const DashBoardStats = () => {
                 'auth-token': localAuth
             },
         };
-        fetch(`${process.env.REACT_APP_URL}/api/auth/getdrscount`, requestOptions)
+        fetch(`${process.env.REACT_APP_URL}/api/auth/getallnewdoctors`, requestOptions)
             .then(response => response.json())
-            .then(data => setAllDrs(data.drs));
+            // .then(data => setCountNew(data.drs));
+            .then((data) =>
+                {
+                    // console.log(data.drs + " data")
+                    setCountNew(data.drs);
+                });
+            
+    }
+    const getAllMr = () => {
+
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localAuth
+            },
+        };
+        fetch(`${process.env.REACT_APP_URL}/api/auth/countmr`, requestOptions)
+            .then(response => response.json())
+            .then(data => setCountMr(data.drs));
+    }
+    const getAllRejected = () => {
+
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localAuth
+            },
+        };
+        fetch(`${process.env.REACT_APP_URL}/api/auth/getallrejectedrequests`, requestOptions)
+            .then(response => response.json())
+            .then(data => setCountRejected(data.drs));
+    }
+    const getAllDone = () => {
+
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localAuth
+            },
+        };
+        fetch(`${process.env.REACT_APP_URL}/api/auth/getalldonedoctors`, requestOptions)
+            .then(response => response.json())
+            .then(data => setCountDone(data.drs));
     }
 
-
-    // let done;
-    // let reject;
-    // let newdr;
     let currentUserRole;
 
     if (currUser) {
-    //     // console.log(currUser)
         currentUserRole = currUser.user.role;
-    //     done = allDrs.filter(
-    //         function (ele) {
-    //             return ele.status == 'Done';
-    //         }
-    //     ).length;
-    //     newdr = allDrs.filter(
-    //         function (ele) {
-    //             return ele.status == 'New';
-    //         }
-    //     ).length;
-    //     reject = allDrs.filter(
-    //         function (ele) {
-    //             return ele.status == "Rejected";
-    //         }
-    //     ).length;
+        getAllNew()
+        getAllDone()
+        getAllRejected()
+        getAllMr()
+        // console.log("New: " + countNew)
+
+
 
     }
 
-    // console.log("Done: " + done)
-    // console.log(allDrs)
-    // console.log(typeof(allDrs))
-
-    // if(newdr){     
-    //     setCountNew(newdr);
-    //     setCountRejected(reject);
-    //     setCountDone(done);
-    // }
 
     return (
         <>
@@ -109,7 +131,7 @@ const DashBoardStats = () => {
                                     </div>
                                     <div class="flex flex-col flex-grow ml-4">
                                         <div class="text-sm text-gray-500">New Requests</div>
-                                        <div class="font-bold text-lg">27</div>
+                                        <div class="font-bold text-lg">{countNew}</div>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +142,7 @@ const DashBoardStats = () => {
                                     </div>
                                     <div class="flex flex-col flex-grow ml-4">
                                         <div class="text-sm text-gray-500">Done Requests</div>
-                                        <div class="font-bold text-lg">4</div>
+                                        <div class="font-bold text-lg">{countDone}</div>
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +153,7 @@ const DashBoardStats = () => {
                                     </div>
                                     <div class="flex flex-col flex-grow ml-4">
                                         <div class="text-sm text-gray-500">Rejected Requests</div>
-                                        <div class="font-bold text-lg">16</div>
+                                        <div class="font-bold text-lg">{countRejected}</div>
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +164,7 @@ const DashBoardStats = () => {
                                     </div>
                                     <div class="flex flex-col flex-grow ml-4">
                                         <div class="text-sm text-gray-500">Total MR</div>
-                                        <div class="font-bold text-lg">23</div>
+                                        <div class="font-bold text-lg">{countMr}</div>
                                     </div>
                                 </div>
                             </div>

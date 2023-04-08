@@ -424,9 +424,7 @@ const Dashboard = () => {
         currentUseradminID = currUser.user.adminID
         currentUserManagerID = currUser.user.managerID
     }
-    // // console.log(currentUseradminID)
-    // console.log(currUser)
-    // // console.log("new member "  +  newMember.name)
+
 
     const [show, setShow] = useState(false);
     /*
@@ -436,7 +434,6 @@ const Dashboard = () => {
 
 
 
-    // console.log(currUser)
     return (
         <>
             <Sidebar />
@@ -501,54 +498,6 @@ const Dashboard = () => {
                 </section>
                 }
 
-                {/* This is for if current use is admin or he is manager no form for tech*/}
-                {/* {(currentUserRole == 3 || currentUserRole == 2) && showForm && <div>
-                    <div className="flex flex-col content-center justify-center">
-                        <section id='form' className='justify-center flex w-full items-center mt-20'>
-                            <div className="form_container">
-                                <div className="w-full py-16 px-12 border-3 border-black bg-gray-100">
-                                    <h2 className="text-3xl mb-4">Create Member</h2>
-
-                                    <form action="#">
-                                        <div className="grid grid-cols-2 gap-5">
-                                            <input type="text" placeholder="Name" className="outline-none border border-gray-400 py-1 px-2" name='name' onChange={handleOnChange} />
-                                            <input type="text" placeholder="Email" name='email' onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2" />
-                                        </div>
-
-                                        <div className="grid grid-cols-2 gap-5 mt-6">
-                                            <input type="text" name='password' onChange={handleOnChange} placeholder="Password" className="outline-none border border-gray-400 py-1 px-2 w-full" />
-                                            {currentUserRole && currentUserRole == 3 ? <div>
-                                                <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
-                                                    <option value="1">Tech</option>
-                                                    <option value="2" defaultValue>Manager</option>
-                                                </select>
-                                            </div> : <div>
-                                                <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
-                                                    <option value="0">Choose Role</option>
-                                                    <option value="0" >Mr</option>
-                                                </select>
-                                            </div>
-                                            }
-
-                                        </div>
-                                        <div className="mt-5">
-                                            <h3 className="text-red-700 font-bold text-xl capitalize">
-                                                {error}
-                                            </h3>
-                                        </div>
-                                        <div className="mt-5">
-                                            {currentUserRole == 3 ? <a onClick={createnewMemeber} className="cursor-pointer w-1/3 align-baseline content-center bg-purple-800 px-2 py-3 text-center text-white">
-                                                Create Member</a> :
-                                                <a onClick={createnewMr} className="cursor-pointer w-1/3 align-baseline content-center bg-purple-800 px-2 py-3 text-center text-white">
-                                                    Create Mr</a>
-                                            }
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </section >
-                    </div>
-                </div>} */}
                 {
                     (currentUserRole == 3 || currentUserRole == 2) && showForm &&
 
@@ -578,14 +527,6 @@ const Dashboard = () => {
                                         <label class="block font-bold mb-2" for="position">
                                             Position
                                         </label>
-                                        {/* <select
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="position">
-                                    <option>Select a Specialty</option>
-                                    <option>MR</option>
-                                    <option>Manager</option>
-                                    <option>Tech</option>
-                                </select> */}
                                         {currentUserRole && currentUserRole == 3 ? <div>
                                             <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
                                                 <option value="">Select Member Role</option>
@@ -642,52 +583,6 @@ const Dashboard = () => {
                     </div>
                 }
 
-                {/* To create new doctor */}
-                {/* {currentUserRole == 0 && createNewDoctor && <div>
-                    <div className="flex flex-col content-center justify-center">
-                        <section id='form' className='justify-center flex w-full items-center mt-20'>
-                            <div className="form_container">
-                                <div className="w-full py-16 px-12 border-3 border-black bg-gray-100">
-                                    <h2 className="text-3xl mb-4">Create New Doctor</h2>
-
-                                    <form action="#">
-                                        <div className="grid grid-cols-2 gap-5">
-                                            <input type="text" placeholder="Name" className="outline-none border border-gray-400 py-1 px-2" name='name'  name= "" onChange={handleOnChangenewDoc} />
-                                            <input type="text" placeholder="Email" name='email'  name= "" onChange={handleOnChangenewDoc} className="outline-none border border-gray-400 py-1 px-2" />
-                                        </div> */}
-
-                {/* <div className="grid grid-cols-2 gap-5 mt-6"> */}
-                {/* {currentUserRole && currentUserRole == 3 ? <div>
-                                                <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
-                                                    <option value="1">Tech</option>
-                                                    <option value="2" defaultValue>Manager</option>
-                                                </select>
-                                            </div> : <div>
-                                                <select onChange={handleOnChange} className="outline-none border border-gray-400 py-1 px-2 w-full bg-slate-100" id="role" name="role">
-                                                    <option value="0">Choose Role</option>
-                                                    <option value="0" >Mr</option>
-                                                </select>
-                                            </div>
-                                            } */}
-
-                {/* </div>
-                                        <div className="mt-5">
-                                            <h3 className="text-red-700 font-bold text-xl capitalize">
-                                                {error}
-                                            </h3>
-                                        </div>
-                                        <div className="mt-5">
-
-                                            <a onClick={createDoctor} className="cursor-pointer w-1/3 align-baseline content-center bg-purple-800 px-2 py-3 text-center text-white">
-                                                Create Doctor</a>
-
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </section >
-                    </div>
-                </div>} */}
 
                 {currentUserRole == 0 && createNewDoctor &&
                     <div class="w-full bg-[#4fbae7]">
@@ -737,13 +632,6 @@ const Dashboard = () => {
                                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-slate-500"
                                                 id="phoneno" name="phone" onChange={handleOnChangenewDoc} value={newDoc.phone} type="number" placeholder="Phone Number" />
                                         </div>
-                                        {/* <div class="mb-4">
-                                        <label class="block text-gray-700 font-bold mb-2" for="profilephoto">Upload Profile
-                                            Picture</label>
-                                        <input
-                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            id="profilephoto" type="file" />
-                                    </div> */}
                                     </div>
                                     <div class="max-w-screen mx-4 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                                         <h2 class="text-xl font-bold mb-4 ">Career Details </h2>
